@@ -22,12 +22,12 @@ public class Booking {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User client;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "establishment_id", nullable = false)
-    private Establishment establishment;
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    private Restaurant establishment;
 
     @Column(name = "booking_date_time", nullable = false)
     private LocalDateTime reservationDateTime;

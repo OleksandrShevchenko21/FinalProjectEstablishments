@@ -1,5 +1,8 @@
 package com.finalprojectestablishments.finalprojectestablishments.entity;//package com.example.test_march.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,12 +24,16 @@ public class Review {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id", nullable = false)
-    private Client client;
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "establishment_id", nullable = false)
-    private Establishment establishment;
+    @JoinColumn(name = "restaurant_id", nullable = false)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
+    private Restaurant restaurant;
 
     @Column(nullable = false)
     private int rating;

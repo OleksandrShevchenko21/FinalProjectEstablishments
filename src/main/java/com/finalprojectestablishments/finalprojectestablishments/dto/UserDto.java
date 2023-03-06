@@ -1,5 +1,6 @@
 package com.finalprojectestablishments.finalprojectestablishments.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+public class UserDto {
+    @NotBlank
+    private String userName;
+    @NotBlank
+    private String password;
 
-public class EstablishmentDto {
-    private int id;
-    private String establishmentName;
 }

@@ -1,9 +1,7 @@
 package com.finalprojectestablishments.finalprojectestablishments.dto;
 
-import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,9 +21,9 @@ public class ReviewDto {
 //    @DecimalMin(1.0)
     private int rating;
 //    @NotNull
-    private int clientId;
+    private int userId;
 //    @NotNull
-    private int establishmentId;
+    private int restaurantId;
 //    @NotNull
     @DecimalMin(value = "0.0", inclusive = false)
     private BigDecimal averageCheck;

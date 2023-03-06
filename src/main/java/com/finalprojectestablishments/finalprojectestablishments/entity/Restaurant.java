@@ -12,8 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "establishment")
-public class Establishment {
+@Table(name = "restaurant")
+public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
