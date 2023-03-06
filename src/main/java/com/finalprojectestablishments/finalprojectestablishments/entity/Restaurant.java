@@ -21,5 +21,5 @@ public class Restaurant {
 
     @Column(nullable = false)
     @NotEmpty
-    private String name;
+    private String restaurantName;
 }

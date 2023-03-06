@@ -40,7 +40,7 @@ public class RestaurantController {
     @PatchMapping("/{id}")
     public void updateRestaurant(@PathVariable int id, @RequestBody RestaurantDto restaurantDto) {
         Restaurant restaurant = restaurantDao.findById(id).get();
-        restaurant.setName(restaurantDto.getRestaurantName());
+        restaurant.setRestaurantName(restaurantDto.getRestaurantName());
         restaurantDao.save(restaurant);
     }
 
