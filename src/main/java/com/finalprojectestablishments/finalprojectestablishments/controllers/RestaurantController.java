@@ -1,9 +1,9 @@
 package com.finalprojectestablishments.finalprojectestablishments.controllers;
 
-import com.finalprojectestablishments.finalprojectestablishments.dao.RestaurantDao;
 import com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
 import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
+import com.finalprojectestablishments.finalprojectestablishments.utils.RestaurantsConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -16,19 +16,23 @@ import java.util.List;
 @RequestMapping("/api/restaurants")
 @AllArgsConstructor
 public class RestaurantController {
-    private RestaurantDao restaurantDao;
+
     private RestaurantService restaurantService;
+    private RestaurantsConverter restaurantsConverter;
 
     @GetMapping("")
-    public ResponseEntity<List<Restaurant>> getAllRestaurants() {
-        List<Restaurant> all = restaurantDao.findAll();
-        return new ResponseEntity<>(all, HttpStatusCode.valueOf(200));
+    public ResponseEntity<List<RestaurantDto>> getAllRestaurants() {
+        List<Restaurant> restaurants = restaurantService.findAll();
+        List<RestaurantDto> restaurantDtoList = restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
+        return new ResponseEntity<>(restaurantDtoList,HttpStatusCode.valueOf(200));
+
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Restaurant> getOneEstablishment(@PathVariable int id) {
-        Restaurant restaurant = restaurantDao.findById(id).get();
-        return new ResponseEntity<>(restaurant, HttpStatusCode.valueOf(200));
+    public ResponseEntity<RestaurantDto> getOneRestaurant(@PathVariable int id) {
+        Restaurant restaurant = restaurantService.findById(id);
+        RestaurantDto restaurantDto = restaurantsConverter.restaurantToRestaurantDto(restaurant);
+        return new ResponseEntity<>(restaurantDto, HttpStatusCode.valueOf(200));
     }
 
     @PostMapping("")
@@ -39,14 +43,14 @@ public class RestaurantController {
 
     @PatchMapping("/{id}")
     public void updateRestaurant(@PathVariable int id, @RequestBody RestaurantDto restaurantDto) {
-        Restaurant restaurant = restaurantDao.findById(id).get();
+        Restaurant restaurant = restaurantService.findById(id);
         restaurant.setRestaurantName(restaurantDto.getRestaurantName());
-        restaurantDao.save(restaurant);
+        restaurantService.update(id,restaurant);
     }
 
     @DeleteMapping("/{id}")
     public void deleteRestaurant(@PathVariable int id) {
-        restaurantDao.deleteById(id);
+        restaurantService.deleteById(id);
     }
 
 }

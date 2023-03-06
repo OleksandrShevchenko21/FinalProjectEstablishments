@@ -7,7 +7,7 @@ import com.finalprojectestablishments.finalprojectestablishments.entity.User;
 import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
 import com.finalprojectestablishments.finalprojectestablishments.services.ReviewService;
 import com.finalprojectestablishments.finalprojectestablishments.services.UserService;
-import com.finalprojectestablishments.finalprojectestablishments.utils.ReviewConvertor;
+import com.finalprojectestablishments.finalprojectestablishments.utils.ReviewConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -24,7 +24,7 @@ public class ReviewController {
     private ReviewService reviewService;
     private UserService userService;
     private RestaurantService restaurantService;
-    private ReviewConvertor reviewConvertor;
+    private ReviewConverter reviewConvertor;
 
     @GetMapping("")
     public ResponseEntity<List<ReviewDto>> getAllReviews() {

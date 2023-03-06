@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class ReviewConvertor {
+public class ReviewConverter {
 
     public ReviewDto reviewToReviewDto(Review review) {
         ReviewDto dto = new ReviewDto();
+        dto.setId(review.getId());
         dto.setUserId(review.getUser().getId());
         dto.setRestaurantId(review.getRestaurant().getId());
         dto.setComment(review.getComment());

@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReviewDto {
+    private int id;
     @NotBlank
     private String comment;
 //    @NotNull

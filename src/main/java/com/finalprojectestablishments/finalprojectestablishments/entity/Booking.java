@@ -1,5 +1,6 @@
 package com.finalprojectestablishments.finalprojectestablishments.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,27 +24,29 @@ public class Booking {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User client;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurant_id", nullable = false)
-    private Restaurant establishment;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Restaurant restaurant;
 
-    @Column(name = "booking_date_time", nullable = false)
+    @Column(name = "booking_date_time")
     private LocalDateTime reservationDateTime;
 
     private String purpose;
 
-    private String writeToMe;
+//    private String writeToMe;
 
-    private boolean drink;
+//    private boolean drink;
 
     private String gender;
 
     private int numPeople;
 
-    private String pays;
+    private String whoPays;
 
-    private BigDecimal desiredExpenses;
+    private double desiredExpenses;
 
 }
