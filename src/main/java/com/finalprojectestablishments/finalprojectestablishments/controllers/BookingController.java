@@ -1,10 +1,8 @@
 package com.finalprojectestablishments.finalprojectestablishments.controllers;
 
 import com.finalprojectestablishments.finalprojectestablishments.dto.BookingDto;
-import com.finalprojectestablishments.finalprojectestablishments.dto.ReviewDto;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Booking;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
-import com.finalprojectestablishments.finalprojectestablishments.entity.Review;
 import com.finalprojectestablishments.finalprojectestablishments.entity.User;
 import com.finalprojectestablishments.finalprojectestablishments.services.BookingService;
 import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
@@ -28,7 +26,7 @@ public class BookingController {
     private BookingConverter bookingConverter;
 
     @GetMapping("")
-    public ResponseEntity<List<BookingDto>> getAllReviews() {
+    public ResponseEntity<List<BookingDto>> getAllBooking() {
         List<Booking> reviews = bookingService.findAll();
         List<BookingDto> bookingDtoList = bookingConverter.bookingListToBookingDtoList(reviews);
         return new ResponseEntity<>(bookingDtoList, HttpStatusCode.valueOf(200));

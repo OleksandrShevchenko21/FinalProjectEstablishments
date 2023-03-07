@@ -38,8 +38,8 @@ public class UserController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveClient(@RequestBody User client) {
-        userService.save(client);
+    public void saveClient(@RequestBody User user) {
+        userService.save(user);
     }
 
     @PatchMapping("/{id}")

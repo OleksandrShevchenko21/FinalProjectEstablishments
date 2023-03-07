@@ -37,7 +37,9 @@ public class RestaurantController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveRestaurant(@RequestBody Restaurant restaurant) {
+    public void saveRestaurant(@RequestBody RestaurantDto restaurantdto) {
+        Restaurant restaurant =new Restaurant();
+        restaurant.setRestaurantName(restaurantdto.getRestaurantName());
         restaurantService.save(restaurant);
     }
 
