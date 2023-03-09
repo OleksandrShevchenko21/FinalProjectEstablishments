@@ -7,7 +7,7 @@ import com.finalprojectestablishments.finalprojectestablishments.entity.User;
 import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
 import com.finalprojectestablishments.finalprojectestablishments.services.ReviewService;
 import com.finalprojectestablishments.finalprojectestablishments.services.UserService;
-import com.finalprojectestablishments.finalprojectestablishments.utils.ReviewConverter;
+import com.finalprojectestablishments.finalprojectestablishments.utils.converter.ReviewConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

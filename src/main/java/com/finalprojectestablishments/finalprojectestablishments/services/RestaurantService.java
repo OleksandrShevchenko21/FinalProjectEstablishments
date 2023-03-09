@@ -4,6 +4,8 @@ import com.finalprojectestablishments.finalprojectestablishments.dao.RestaurantD
 import com.finalprojectestablishments.finalprojectestablishments.entity.Booking;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
 import lombok.AllArgsConstructor;
+
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +15,9 @@ import java.util.List;
 public class RestaurantService {
     private RestaurantDao restaurantDao;
 
-    public List<Restaurant> findAll() {
-
-        return restaurantDao.findAll();
-    }
+public Page<Restaurant> findAll(Pageable pageable) {
+    return restaurantDao.findAll(pageable);
+}
 
     public void save (Restaurant restaurant){
         restaurantDao.save(restaurant);

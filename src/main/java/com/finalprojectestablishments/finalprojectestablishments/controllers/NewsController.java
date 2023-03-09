@@ -7,7 +7,7 @@ import com.finalprojectestablishments.finalprojectestablishments.entity.news.Gen
 import com.finalprojectestablishments.finalprojectestablishments.entity.news.PromotionNews;
 import com.finalprojectestablishments.finalprojectestablishments.services.NewsService;
 import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
-import com.finalprojectestablishments.finalprojectestablishments.utils.NewsConverter;
+import com.finalprojectestablishments.finalprojectestablishments.utils.converter.NewsConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

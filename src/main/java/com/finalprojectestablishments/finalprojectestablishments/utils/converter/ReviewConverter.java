@@ -1,4 +1,4 @@
-package com.finalprojectestablishments.finalprojectestablishments.utils;
+package com.finalprojectestablishments.finalprojectestablishments.utils.converter;
 
 
 import com.finalprojectestablishments.finalprojectestablishments.dto.ReviewDto;
