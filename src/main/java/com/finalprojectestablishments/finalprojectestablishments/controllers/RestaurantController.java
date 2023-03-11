@@ -14,10 +14,13 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.Map;
 
 @RestController
 @RequestMapping("/api/restaurants")
@@ -28,31 +31,10 @@ public class RestaurantController {
     private RestaurantsConverter restaurantsConverter;
     private BuildPage buildPage;
 
-    //    @GetMapping("")
-//    public ResponseEntity<List<RestaurantDto>> getAllRestaurants() {
-//        List<Restaurant> restaurants = restaurantService.findAll();
-//        List<RestaurantDto> restaurantDtoList = restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
-//        return new ResponseEntity<>(restaurantDtoList,HttpStatusCode.valueOf(200));
-//
-//    }
 
-//    GET /api/users?page=2&size=10&sort=name&filter=active HTTP/1.1
-//    Host: example.com
-//    Authorization: Bearer <token>
-//    Accept: application/json
-//    api/restaurants?page=1&size=10&minAvgCheck=10&maxAvgCheck=500&type=BAR&minRating=3 HTTP/1.1
 //    GET /api/restaurants?page=1&size=10&minAvgCheck=10.0&maxAvgCheck=50.0&type=BAR&minRating=4
 
-    //    @GetMapping(path = "/characters/page")
-//    Page<MovieCharacter> loadCharactersPage(
-//            @PageableDefault(page = 0, size = 20)
-//            @SortDefault.SortDefaults({
-//                    @SortDefault(sort = "name", direction = Sort.Direction.DESC),
-//                    @SortDefault(sort = "id", direction = Sort.Direction.ASC)
-//            })
-//            Pageable pageable) {
-//        return characterRepository.findAllPage(pageable);
-//    }
+
     @GetMapping("")
     public ResponseEntity<Page<RestaurantDto>> getAllRestaurants(
 //            @PageableDefault(page = 0, size = 20,sort = {"id"},
@@ -69,27 +51,61 @@ public class RestaurantController {
 
         Pageable pageable = PageRequest.of(page - 1, size);
         Page<RestaurantDto> restaurants;
+        restaurants = restaurantService.findAll(pageable);
 
+//        if (minAvgCheck != null && maxAvgCheck != null) {
+//            restaurants = restaurantService.findByAverageCheckBetween(minAvgCheck, maxAvgCheck, pageable);
+//        } else if (minAvgCheck != null) {
+//            restaurants = restaurantService.findByAverageCheckGreaterThanEqual(minAvgCheck, pageable);
+//        } else if (maxAvgCheck != null) {
+//            restaurants = restaurantService.findByAverageCheckLessThanEqual(maxAvgCheck, pageable);
+//        } else if (type != null) {
+//            restaurants = restaurantService.getRestaurantsByType(type, pageable);
+//        } else if (minRating != null) {
+//            restaurants = restaurantService.getRestaurantsByRatingGreaterThanEqual(minRating, pageable);
+//        } else {
+//            restaurants = restaurantService.findAll(pageable);
+//        }
+////        Page<RestaurantDto> restaurants = restaurantService.getAllRestaurants(pageable, minAvgCheck, maxAvgCheck, type, minRating);
+//
+//        List<RestaurantDto> restaurantDtoList = restaurants.getContent();
+//        Page<RestaurantDto> restaurantDtoPage = new PageImpl<>(restaurantDtoList, pageable, restaurants.getTotalElements());
+//        response.setHeader("link", buildPage.buildPageLinkHeader("/api/restaurants", restaurants));
+//        return new ResponseEntity<>(restaurantDtoPage, HttpStatus.OK);
+//        }
+//        if (type != null) {
+//            Page<RestaurantDto> restaurantsByType = restaurantService.getRestaurantsByType(type, pageable);
+//            response.setHeader("link", buildPage.buildPageLinkHeader("/api/restaurants?type=" + type, restaurantsByType));
+//            return new ResponseEntity<>(restaurantsByType, HttpStatus.OK);
+//        }
+//
+//        if (minAvgCheck != null && maxAvgCheck != null) {
+//            Page<RestaurantDto> restaurantsByAvgCheck = restaurantService.findByAverageCheckBetween(minAvgCheck, maxAvgCheck, pageable);
+//            response.setHeader("link", buildPage.buildPageLinkHeader("/api/restaurants?minAvgCheck=" + minAvgCheck + "&maxAvgCheck=" + maxAvgCheck, restaurantsByAvgCheck));
+//            return new ResponseEntity<>(restaurantsByAvgCheck, HttpStatus.OK);
+//        }
+//
+//        if (minAvgCheck != null) {
+//            Page<RestaurantDto> restaurantsByMinAvgCheck = restaurantService.findByAverageCheckGreaterThanEqual(minAvgCheck, pageable);
+//            response.setHeader("link", buildPage.buildPageLinkHeader("/api/restaurants?minAvgCheck=" + minAvgCheck, restaurantsByMinAvgCheck));
+//            return new ResponseEntity<>(restaurantsByMinAvgCheck, HttpStatus.OK);
+//        }
+//
+//        if (maxAvgCheck != null) {
+//            Page<RestaurantDto> restaurantsByMaxAvgCheck = restaurantService.findByAverageCheckLessThanEqual(maxAvgCheck, pageable);
+//            response.setHeader("link", buildPage.buildPageLinkHeader("/api/restaurants?maxAvgCheck=" + maxAvgCheck, restaurantsByMaxAvgCheck));
+//            return new ResponseEntity<>(restaurantsByMaxAvgCheck, HttpStatus.OK);
+//        }
+//
+//        if (minRating != null) {
+//            Page<RestaurantDto> restaurantsByMinRating = restaurantService.getRestaurantsByRatingGreaterThanEqual(minRating, pageable);
+//            response.setHeader("link", buildPage.buildPageLinkHeader("/api/restaurants?minRating=" + minRating, restaurantsByMinRating));
+//            return new ResponseEntity<>(restaurantsByMinRating, HttpStatus.OK);
+//        }
 
-        if (minAvgCheck != null && maxAvgCheck != null) {
-            restaurants = restaurantService.findByAverageCheckBetween(minAvgCheck, maxAvgCheck, pageable);
-        } else if (minAvgCheck != null) {
-            restaurants = restaurantService.findByAverageCheckGreaterThanEqual(minAvgCheck, pageable);
-        } else if (maxAvgCheck != null) {
-            restaurants = restaurantService.findByAverageCheckLessThanEqual(maxAvgCheck, pageable);
-        } else if (type != null) {
-            restaurants = restaurantService.getRestaurantsByType(type, pageable);
-        } else if (minRating != null) {
-            restaurants = restaurantService.getRestaurantsByRatingGreaterThanEqual(minRating, pageable);
-        } else {
-            restaurants = restaurantService.findAll(pageable);
-        }
-//        Page<RestaurantDto> restaurants = restaurantService.getAllRestaurants(pageable, minAvgCheck, maxAvgCheck, type, minRating);
-
-        List<RestaurantDto> restaurantDtoList = restaurants.getContent();
-        Page<RestaurantDto> restaurantDtoPage = new PageImpl<>(restaurantDtoList, pageable, restaurants.getTotalElements());
-        response.setHeader("link", buildPage.buildPageLinkHeader("/api/restaurants", restaurants));
-        return new ResponseEntity<>(restaurantDtoPage, HttpStatus.OK);
+        Page<RestaurantDto> allRestaurants = restaurantService.findAll(pageable);
+        response.setHeader("link", buildPage.buildPageLinkHeader("/api/restaurants", allRestaurants));
+        return new ResponseEntity<>(allRestaurants, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -152,16 +168,31 @@ public class RestaurantController {
         return restaurantService.getRestaurantsOrderByNameDesc();
     }
 
-//    @GetMapping("/filter/average-rating")
-////    {{jserver}}/api/restaurants/filter/average-rating?minRating=60
-//    public List<RestaurantDto> getRestaurantsByRatingGreaterThanEqual(@RequestParam int minRating) {
-//        return restaurantService.getRestaurantsByRatingGreaterThanEqual(minRating);
-//    }
+    @GetMapping("/filter/average-rating")
+//    {{jserver}}/api/restaurants/filter/average-rating?minRating=60
+    public List<RestaurantDto> getRestaurantsByRatingGreaterThanEqual(@RequestParam int minRating) {
+        return restaurantService.getRestaurantsByRatingGreaterThanEqual(minRating);
+    }
 
-//    @GetMapping("/filter/type")
-////    {{jserver}}/api/restaurants/filter/type?type=BAR
-//    public List<RestaurantDto> getRestaurantsByType(@RequestParam String type) {
-//        return restaurantService.getRestaurantsByType(type);
-//    }
+    @GetMapping("/filter/type")
+//    {{jserver}}/api/restaurants/filter/type?type=BAR
+    public List<RestaurantDto> getRestaurantsByType(@RequestParam String type) {
+        return restaurantService.getRestaurantsByType(type);
+    }
+    @GetMapping("/filter/average-check/between")
+//    {{jserver}}/api/restaurants/filter/average-check/between?minAvgCheck=50.0&maxAvgCheck=100.0
+    public List<RestaurantDto> getRestaurantsByAverageCheckBetween(@RequestParam Double minAvgCheck, Double maxAvgCheck) {
+        return restaurantService.findByAverageCheckBetween(minAvgCheck,maxAvgCheck);
+    }
+    @GetMapping("/filter/average-check/greater")
+//    {{jserver}}/api/restaurants/filter/average-check/greater?minAvgCheck=50.0
+    public List<RestaurantDto> getRestaurantsByAverageCheckGreaterThanEqual(@RequestParam Double minAvgCheck) {
+        return restaurantService.findByAverageCheckGreaterThanEqual(minAvgCheck);
+    }
+    @GetMapping("/filter/average-check/less")
+//    {{jserver}}/api/restaurants/filter/average-check/greater?maxAvgCheck=50.0
+    public List<RestaurantDto> getRestaurantsByAverageCheckLessThanEqual(@RequestParam Double maxAvgCheck) {
+        return restaurantService.findByAverageCheckLessThanEqual(maxAvgCheck);
+    }
 
 }

@@ -4,16 +4,14 @@ import com.finalprojectestablishments.finalprojectestablishments.dao.RestaurantD
 import com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.RestaurantsConverter;
-import com.finalprojectestablishments.finalprojectestablishments.entity.Review;
 import lombok.AllArgsConstructor;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -65,38 +63,38 @@ public Page<RestaurantDto> findAll(Pageable pageable) {
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
 
-    public Page<RestaurantDto> getRestaurantsByRatingGreaterThanEqual(int minRating, Pageable pageable) {
-        Page<Restaurant> restaurants = restaurantDao.findByRatingGreaterThanEqual(minRating,pageable);
-        return restaurants.map(this::convertToDto);
+    public List<RestaurantDto> getRestaurantsByRatingGreaterThanEqual(int minRating) {
+        List<RestaurantDto> restaurants = restaurantDao.findByRatingGreaterThanEqual(minRating);
+        return restaurants;
     }
 
-//    public List<RestaurantDto> getRestaurantsByType(String type) {
+    public List<RestaurantDto> getRestaurantsByType(String type) {
+
+        List<Restaurant> restaurants = restaurantDao.findByType(type);
+        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
+    }
+
+//    public Page<RestaurantDto> getRestaurantsByType(String type, Pageable pageable) {
 //
-//        List<Restaurant> restaurants = restaurantDao.findByType(type);
-//        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
+//        Page<Restaurant> restaurants = restaurantDao.findByType(type,pageable);
+//        return restaurants.map(this::convertToDto);
 //    }
 
-    public Page<RestaurantDto> getRestaurantsByType(String type, Pageable pageable) {
-
-        Page<Restaurant> restaurants = restaurantDao.findByType(type,pageable);
-        return restaurants.map(this::convertToDto);
-    }
-
-    public Page<RestaurantDto> findByAverageCheckBetween(Double minAvgCheck, Double maxAvgCheck, Pageable pageable) {
-        Page<Restaurant> restaurants = restaurantDao.findByAverageCheckBetween(minAvgCheck, maxAvgCheck, pageable);
-        return restaurants.map(this::convertToDto);
+    public List<RestaurantDto> findByAverageCheckBetween(Double minAvgCheck, Double maxAvgCheck) {
+        List<Restaurant> restaurants = restaurantDao.findByAverageCheckBetween(minAvgCheck, maxAvgCheck);
+        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
 
 
-    public Page<RestaurantDto> findByAverageCheckGreaterThanEqual(Double minAvgCheck, Pageable pageable) {
-        Page<Restaurant> restaurants = restaurantDao.findByAverageCheckGreaterThanEqual(minAvgCheck, pageable);
-        return restaurants.map(this::convertToDto);
+    public List<RestaurantDto> findByAverageCheckGreaterThanEqual(Double minAvgCheck) {
+        List<Restaurant> restaurants = restaurantDao.findByAverageCheckGreaterThanEqual(minAvgCheck);
+        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
 
     }
 
-    public Page<RestaurantDto> findByAverageCheckLessThanEqual(Double maxAvgCheck, Pageable pageable) {
-        Page<Restaurant> restaurants = restaurantDao.findByAverageCheckLessThanEqual(maxAvgCheck, pageable);
-        return restaurants.map(this::convertToDto);
+    public List<RestaurantDto> findByAverageCheckLessThanEqual(Double maxAvgCheck) {
+        List<Restaurant> restaurants = restaurantDao.findByAverageCheckLessThanEqual(maxAvgCheck);
+        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
 
     }
 //    public Page<RestaurantDto> getAllRestaurants(Pageable pageable, Double minAvgCheck, Double maxAvgCheck, String type, Integer minRating) {

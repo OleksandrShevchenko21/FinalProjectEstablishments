@@ -1,5 +1,6 @@
 package com.finalprojectestablishments.finalprojectestablishments.dto;
 
+import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,16 @@ public class RestaurantDto {
 
     //    private Double averageRating;
     private Double averageCheck;
+
+    public RestaurantDto(RestaurantDto restaurantDto) {
+
+    }
+
+    public RestaurantDto(Restaurant restaurant) {
+
+    }
+
+
     //
 //    private List<Review> reviews;
 
