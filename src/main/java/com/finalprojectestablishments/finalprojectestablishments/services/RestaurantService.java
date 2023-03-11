@@ -1,21 +1,31 @@
 package com.finalprojectestablishments.finalprojectestablishments.services;
 
 import com.finalprojectestablishments.finalprojectestablishments.dao.RestaurantDao;
+import com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
+import com.finalprojectestablishments.finalprojectestablishments.utils.converter.RestaurantsConverter;
+import com.finalprojectestablishments.finalprojectestablishments.entity.Review;
 import lombok.AllArgsConstructor;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class RestaurantService {
     private RestaurantDao restaurantDao;
+    private RestaurantsConverter restaurantsConverter;
+    private final ModelMapper modelMapper;
 
-public Page<Restaurant> findAll(Pageable pageable) {
-    return restaurantDao.findAll(pageable);
+public Page<RestaurantDto> findAll(Pageable pageable) {
+    Page<Restaurant> restaurants = restaurantDao.findAll(pageable);
+    return restaurants.map(this::convertToDto);
+
 }
 
     public void save (Restaurant restaurant){
@@ -34,7 +44,7 @@ public Page<Restaurant> findAll(Pageable pageable) {
         restaurantDao.deleteById(id);
     }
 
-    public List<Restaurant> getRestaurantsSortedByRating() {
+    public List<RestaurantDto> getRestaurantsSortedByRating() {
         return restaurantDao.findAllByOrderByRatingAsc();
     }
 //    public List<Restaurant> getRestaurantsDateOfPublishAsc() {
@@ -45,32 +55,58 @@ public Page<Restaurant> findAll(Pageable pageable) {
 //    }
 
 
-    public List<Restaurant> getRestaurantsOrderByNameAsc() {
-    return restaurantDao.findAllByOrderByRestaurantNameAsc();
+    public List<RestaurantDto> getRestaurantsOrderByNameAsc() {
+        List<Restaurant> restaurants = restaurantDao.findAllByOrderByRestaurantNameAsc();
+        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
-    public List<Restaurant> getRestaurantsOrderByNameDesc() {
-        return restaurantDao.findAllByOrderByRestaurantNameDesc();
-    }
-
-    public List<Restaurant> getRestaurantsByRatingGreaterThanEqual(int minRating) {
-    return restaurantDao.findByRatingGreaterThanEqual(minRating);
-    }
-
-    public List<Restaurant> getRestaurantsByType(String type) {
-    return restaurantDao.findByType(type);
+    public List<RestaurantDto> getRestaurantsOrderByNameDesc() {
+//        return restaurantDao.findAllByOrderByRestaurantNameDesc();
+        List<Restaurant> restaurants = restaurantDao.findAllByOrderByRestaurantNameDesc();
+        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
 
-    public Page<Restaurant> findByAverageCheckBetween(Double minAvgCheck, Double maxAvgCheck, Pageable pageable) {
-        return restaurantDao.findByAverageCheckBetween(minAvgCheck, maxAvgCheck, pageable);
+    public Page<RestaurantDto> getRestaurantsByRatingGreaterThanEqual(int minRating, Pageable pageable) {
+        Page<Restaurant> restaurants = restaurantDao.findByRatingGreaterThanEqual(minRating,pageable);
+        return restaurants.map(this::convertToDto);
     }
 
-    public Page<Restaurant> findByAverageCheckGreaterThanEqual(Double minAvgCheck, Pageable pageable) {
-        return restaurantDao.findByAverageCheckGreaterThanEqual(minAvgCheck, pageable);
+//    public List<RestaurantDto> getRestaurantsByType(String type) {
+//
+//        List<Restaurant> restaurants = restaurantDao.findByType(type);
+//        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
+//    }
+
+    public Page<RestaurantDto> getRestaurantsByType(String type, Pageable pageable) {
+
+        Page<Restaurant> restaurants = restaurantDao.findByType(type,pageable);
+        return restaurants.map(this::convertToDto);
     }
 
-    public Page<Restaurant> findByAverageCheckLessThanEqual(Double maxAvgCheck, Pageable pageable) {
-        return restaurantDao.findByAverageCheckLessThanEqual(maxAvgCheck, pageable);
+    public Page<RestaurantDto> findByAverageCheckBetween(Double minAvgCheck, Double maxAvgCheck, Pageable pageable) {
+        Page<Restaurant> restaurants = restaurantDao.findByAverageCheckBetween(minAvgCheck, maxAvgCheck, pageable);
+        return restaurants.map(this::convertToDto);
     }
+
+
+    public Page<RestaurantDto> findByAverageCheckGreaterThanEqual(Double minAvgCheck, Pageable pageable) {
+        Page<Restaurant> restaurants = restaurantDao.findByAverageCheckGreaterThanEqual(minAvgCheck, pageable);
+        return restaurants.map(this::convertToDto);
+
+    }
+
+    public Page<RestaurantDto> findByAverageCheckLessThanEqual(Double maxAvgCheck, Pageable pageable) {
+        Page<Restaurant> restaurants = restaurantDao.findByAverageCheckLessThanEqual(maxAvgCheck, pageable);
+        return restaurants.map(this::convertToDto);
+
+    }
+//    public Page<RestaurantDto> getAllRestaurants(Pageable pageable, Double minAvgCheck, Double maxAvgCheck, String type, Integer minRating) {
+//        Page<Restaurant> restaurants = restaurantDao.findByAverageCheckBetweenAndTypeAndRatingGreaterThanEqual(minAvgCheck, maxAvgCheck, type, minRating, pageable);
+//        return restaurants.map(this::convertToDto);
+//    }
+    private RestaurantDto convertToDto(Restaurant restaurant) {
+        return modelMapper.map(restaurant, RestaurantDto.class);
+    }
+
 }
 
 

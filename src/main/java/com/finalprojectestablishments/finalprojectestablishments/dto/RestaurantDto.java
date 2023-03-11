@@ -28,7 +28,7 @@ public class RestaurantDto {
     //    private Double averageRating;
     private Double averageCheck;
     //
-    private List<Review> reviews;
+//    private List<Review> reviews;
 
     // constructors, getters, and setters
 

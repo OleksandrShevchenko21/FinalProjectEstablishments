@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Component
 public class RestaurantsConverter {
-    private ReviewConverter reviewConverter;
+
     public RestaurantDto restaurantToRestaurantDto(Restaurant restaurant) {
         RestaurantDto dto = new RestaurantDto();
         dto.setId(restaurant.getId());
@@ -26,8 +26,8 @@ public class RestaurantsConverter {
 //        List<ReviewDto> reviewDtoList = restaurant.getReviews().stream()
 //                .map(review -> reviewConverter.reviewToReviewDto(review))
 //                .collect(Collectors.toList());
-//
-//        dto.setReviews(reviewDtoList);
+
+//        dto.setReviews(restaurant.getReviews());
         return dto;
     }
 
