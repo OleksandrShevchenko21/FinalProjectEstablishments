@@ -24,7 +24,7 @@ public class EventNews {
     @Column(name = "event_news")
     private String eventNews;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "restaurant_id", nullable = false)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 

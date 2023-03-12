@@ -20,9 +20,14 @@ public class RestaurantService {
     private RestaurantsConverter restaurantsConverter;
     private final ModelMapper modelMapper;
 
-public Page<RestaurantDto> findAll(Pageable pageable) {
-    Page<Restaurant> restaurants = restaurantDao.findAll(pageable);
-    return restaurants.map(this::convertToDto);
+//public Page<RestaurantDto> findAll(Pageable pageable) {
+//    Page<Restaurant> restaurants = restaurantDao.findAll(pageable);
+//    return restaurants.map(this::convertToDto);
+//
+//}
+public List<RestaurantDto> findAll() {
+    List<Restaurant> restaurants = restaurantDao.findAll();
+    return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
 
 }
 

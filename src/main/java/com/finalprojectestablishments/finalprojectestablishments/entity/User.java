@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,5 +29,8 @@ public class User {
 
     @Column(nullable = false)
     private String role;
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<FavoritesRestaurant> favoritesRestaurants = new ArrayList<>();
 
 }
