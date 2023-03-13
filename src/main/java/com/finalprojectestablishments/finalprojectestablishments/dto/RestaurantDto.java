@@ -1,7 +1,6 @@
 package com.finalprojectestablishments.finalprojectestablishments.dto;
 
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
-import com.finalprojectestablishments.finalprojectestablishments.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,6 +1,6 @@
 package com.finalprojectestablishments.finalprojectestablishments.entity;//package com.example.test_march.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

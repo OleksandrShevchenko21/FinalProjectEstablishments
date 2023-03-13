@@ -10,7 +10,7 @@ import com.finalprojectestablishments.finalprojectestablishments.services.Restau
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.NewsConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,14 +29,14 @@ public class NewsController {
     public ResponseEntity<List<NewsDto>> getAllGeneralNews() {
         List<GeneralNews> news = newsService.findAllGeneral();
         List<NewsDto> newsDtoList = newsConverter.generalNewsListToNewsDtoList(news);
-        return new ResponseEntity<>(newsDtoList, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(newsDtoList, HttpStatus.valueOf(200));
     }
 
     @GetMapping("/general/{id}")
     public ResponseEntity<NewsDto> getOneGeneralNews(@PathVariable int id) {
         GeneralNews generalNews = newsService.findByIdGeneral(id);
         NewsDto newsDto = newsConverter.generalNewsToNewsDto(generalNews);
-        return new ResponseEntity<>(newsDto, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(newsDto, HttpStatus.valueOf(200));
     }
 
     @PostMapping("/general/{restaurantId}")
@@ -72,14 +72,14 @@ public class NewsController {
 public ResponseEntity<List<NewsDto>> getAllPromotionNews() {
     List<PromotionNews> news = newsService.findAllPromotion();
     List<NewsDto> newsDtoList = newsConverter.promotionNewsListToNewsDtoList(news);
-    return new ResponseEntity<>(newsDtoList, HttpStatusCode.valueOf(200));
+    return new ResponseEntity<>(newsDtoList, HttpStatus.valueOf(200));
 }
 
     @GetMapping("/promotion/{id}")
     public ResponseEntity<NewsDto> getOnePromotionNews(@PathVariable int id) {
         PromotionNews promotionNews = newsService.findByIdPromotion(id);
         NewsDto newsDto = newsConverter.promotionNewsToNewsDto(promotionNews);
-        return new ResponseEntity<>(newsDto, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(newsDto, HttpStatus.valueOf(200));
     }
 
     @PostMapping("/promotion/{restaurantId}")
@@ -115,14 +115,14 @@ public ResponseEntity<List<NewsDto>> getAllPromotionNews() {
     public ResponseEntity<List<NewsDto>> getAllEventNews() {
         List<EventNews> news = newsService.findAllEvent();
         List<NewsDto> newsDtoList = newsConverter.eventNewsListToNewsDtoList(news);
-        return new ResponseEntity<>(newsDtoList, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(newsDtoList, HttpStatus.valueOf(200));
     }
 
     @GetMapping("/event/{id}")
     public ResponseEntity<NewsDto> getOneEventNews(@PathVariable int id) {
         EventNews eventNews = newsService.findByIdEvent(id);
         NewsDto newsDto = newsConverter.eventNewsToNewsDto(eventNews);
-        return new ResponseEntity<>(newsDto, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(newsDto, HttpStatus.valueOf(200));
     }
 
     @PostMapping("/event/{restaurantId}")

@@ -1,9 +1,7 @@
 package com.finalprojectestablishments.finalprojectestablishments.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

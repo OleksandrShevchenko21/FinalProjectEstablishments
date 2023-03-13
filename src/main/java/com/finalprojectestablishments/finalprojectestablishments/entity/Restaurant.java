@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.finalprojectestablishments.finalprojectestablishments.entity.news.EventNews;
 import com.finalprojectestablishments.finalprojectestablishments.entity.news.GeneralNews;
 import com.finalprojectestablishments.finalprojectestablishments.entity.news.PromotionNews;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,7 +27,7 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = true)
+    @Column(nullable = false, unique = true)
     @NotEmpty
     private String restaurantName;
 //    @NotBlank

@@ -7,16 +7,16 @@ import com.finalprojectestablishments.finalprojectestablishments.entity.User;
 import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
 import com.finalprojectestablishments.finalprojectestablishments.utils.BuildPage;
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.RestaurantsConverter;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.*;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +25,8 @@ import static com.fasterxml.jackson.databind.type.LogicalType.Map;
 @RestController
 @RequestMapping("/api/restaurants")
 @AllArgsConstructor
-//@CrossOrigin(origins = "http://localhost:3000")
+
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class RestaurantController {
 
     private RestaurantService restaurantService;
@@ -132,7 +133,7 @@ public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
     public ResponseEntity<RestaurantDto> getOneRestaurant(@PathVariable int id) {
         Restaurant restaurant = restaurantService.findById(id);
         RestaurantDto restaurantDto = restaurantsConverter.restaurantToRestaurantDto(restaurant);
-        return new ResponseEntity<>(restaurantDto, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(restaurantDto, HttpStatus.valueOf(200));
     }
 
     //    {{jserver}}/api/restaurants?page=1&size=2&minAvgCheck=50.0&maxAvgCheck=100.0

@@ -10,7 +10,6 @@ import com.finalprojectestablishments.finalprojectestablishments.services.UserSe
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.ReviewConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,14 +29,14 @@ public class ReviewController {
     public ResponseEntity<List<ReviewDto>> getAllReviews() {
         List<Review> reviews = reviewService.findAll();
         List<ReviewDto> reviewDto = reviewConvertor.reviewListToReviewDtoList(reviews);
-        return new ResponseEntity<>(reviewDto, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ReviewDto> getOneReview(@PathVariable int id) {
         Review review = reviewService.findById(id);
         ReviewDto reviewDto = reviewConvertor.reviewToReviewDto(review);
-        return new ResponseEntity<>(reviewDto, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
     }
 
     @PostMapping("/{userId}/{restaurantId}")

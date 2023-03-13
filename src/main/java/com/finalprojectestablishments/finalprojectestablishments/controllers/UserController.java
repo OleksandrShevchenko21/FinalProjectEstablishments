@@ -6,7 +6,6 @@ import com.finalprojectestablishments.finalprojectestablishments.services.UserSe
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.UserConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,14 +24,14 @@ public class UserController {
     public ResponseEntity<List<UserDto>> getAllRestaurants() {
         List<User> users = userService.findAll();
         List<UserDto> userDtoList = userConverter.userListToUserDtoList(users);
-        return new ResponseEntity<>(userDtoList, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(userDtoList, HttpStatus.valueOf(200));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> getOneUser(@PathVariable int id) {
         User user = userService.findById(id);
         UserDto userDto = userConverter.userToUserDto(user);
-        return new ResponseEntity<>(userDto, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(userDto, HttpStatus.valueOf(200));
     }
 
     @PostMapping("")

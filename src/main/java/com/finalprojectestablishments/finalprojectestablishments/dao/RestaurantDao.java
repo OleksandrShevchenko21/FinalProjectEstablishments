@@ -11,14 +11,23 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RestaurantDao extends JpaRepository<Restaurant, Integer> {
+//    void save(Restaurant restaurant);
+//    Optional<Restaurant> findById(int id);
+//    void deleteById(int id);
 
     Page<Restaurant> findAll(Pageable pageable);
+//    @Query("SELECT new com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto" +
+//            "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck) " +
+//            "FROM Restaurant r ORDER BY (SELECT AVG(rev.rating) " +
+//            "FROM Review rev WHERE rev.restaurant = r) ASC")
+//    List<RestaurantDto> findAllByOrderByRatingAsc();
+
     @Query("SELECT new com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto" +
             "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck) " +
-            "FROM Restaurant r ORDER BY (SELECT AVG(rev.rating) " +
-            "FROM Review rev WHERE rev.restaurant = r) ASC")
+            "FROM Restaurant r LEFT JOIN r.reviews rev GROUP BY r.id ORDER BY AVG(rev.rating) ASC")
     List<RestaurantDto> findAllByOrderByRatingAsc();
 
 
@@ -39,6 +48,7 @@ public interface RestaurantDao extends JpaRepository<Restaurant, Integer> {
     List<Restaurant> findByAverageCheckBetween(Double minAvgCheck, Double maxAvgCheck);
     List<Restaurant> findByAverageCheckGreaterThanEqual(Double minAvgCheck);
     List<Restaurant> findByAverageCheckLessThanEqual(Double maxAvgCheck);
+
 
 }
 

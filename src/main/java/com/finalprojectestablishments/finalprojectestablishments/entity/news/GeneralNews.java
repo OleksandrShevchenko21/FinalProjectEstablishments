@@ -3,7 +3,7 @@ package com.finalprojectestablishments.finalprojectestablishments.entity.news;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

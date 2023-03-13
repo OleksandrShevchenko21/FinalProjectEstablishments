@@ -10,7 +10,6 @@ import com.finalprojectestablishments.finalprojectestablishments.services.UserSe
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.BookingConverter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,14 +28,14 @@ public class BookingController {
     public ResponseEntity<List<BookingDto>> getAllBooking() {
         List<Booking> reviews = bookingService.findAll();
         List<BookingDto> bookingDtoList = bookingConverter.bookingListToBookingDtoList(reviews);
-        return new ResponseEntity<>(bookingDtoList, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(bookingDtoList, HttpStatus.valueOf(200));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<BookingDto> getOneBooking(@PathVariable int id) {
         Booking booking = bookingService.findById(id);
         BookingDto bookingDto = bookingConverter.bookingToBookingDto(booking);
-        return new ResponseEntity<>(bookingDto, HttpStatusCode.valueOf(200));
+        return new ResponseEntity<>(bookingDto, HttpStatus.valueOf(200));
     }
 
     @PostMapping("/{userId}/{restaurantId}")
