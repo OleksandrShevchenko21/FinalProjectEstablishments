@@ -14,6 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/users")
 @AllArgsConstructor
+
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class UserController {
 
 
@@ -21,7 +23,7 @@ public class UserController {
     private UserConverter userConverter;
 
     @GetMapping("")
-    public ResponseEntity<List<UserDto>> getAllRestaurants() {
+    public ResponseEntity<List<UserDto>> getAllUsers() {
         List<User> users = userService.findAll();
         List<UserDto> userDtoList = userConverter.userListToUserDtoList(users);
         return new ResponseEntity<>(userDtoList, HttpStatus.valueOf(200));
@@ -36,19 +38,21 @@ public class UserController {
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveClient(@RequestBody User user) {
+    public void saveUser(@RequestBody User user) {
         userService.save(user);
     }
 
     @PatchMapping("/{id}")
-    public void updateClient(@PathVariable int id, @RequestBody UserDto clientDto) {
-        User client = userService.findById(id);
-        client.setUserName(clientDto.getUserName());
-        userService.update(client);
+    public void updateUser(@PathVariable int id, @RequestBody UserDto clientDto) {
+        User user = userService.findById(id);
+        user.setUserName(clientDto.getUserName());
+        user.setPassword(clientDto.getPassword());
+        user.setRole(clientDto.getRole());
+        userService.update(user);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteClient(@PathVariable int id) {
+    public void deleteUser(@PathVariable int id) {
         userService.deleteById(id);
 
     }
