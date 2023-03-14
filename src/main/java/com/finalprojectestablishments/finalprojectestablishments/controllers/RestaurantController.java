@@ -156,6 +156,9 @@ public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
         Restaurant restaurant = restaurantService.findById(id);
         restaurant.setRestaurantName(restaurantDto.getRestaurantName());
         restaurant.setType(restaurantDto.getType());
+        restaurant.setAddress(restaurantDto.getAddress());
+        restaurant.setSchedule(restaurantDto.getSchedule());
+        restaurant.setContacts(restaurantDto.getContacts());
         restaurant.setAverageCheck(restaurantDto.getAverageCheck());
         restaurantService.update(id, restaurant);
     }
