@@ -22,10 +22,10 @@ public class ReviewDto {
 //    @DecimalMin(1.0)
     private int rating;
 //    @NotNull
-    private int userId;
+//    private int userId;
 //    @NotNull
     private int restaurantId;
 //    @NotNull
     @DecimalMin(value = "0.0", inclusive = false)
-    private BigDecimal averageCheck;
+    private Double averageCheck;
 }

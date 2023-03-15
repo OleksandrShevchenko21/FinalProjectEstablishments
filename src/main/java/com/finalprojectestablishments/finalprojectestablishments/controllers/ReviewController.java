@@ -18,6 +18,8 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/reviews")
+
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class ReviewController {
 
     private ReviewService reviewService;
@@ -39,18 +41,20 @@ public class ReviewController {
         return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
     }
 
-    @PostMapping("/{userId}/{restaurantId}")
+    //    @PostMapping("/{userId}/{restaurantId}")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveReview(@PathVariable int userId,
-                           @PathVariable int restaurantId,
-                           @RequestBody ReviewDto reviewDto) {
+    public void saveReview(
+//            @PathVariable int restaurantId,
+//                           @PathVariable int userId
+            @RequestBody ReviewDto reviewDto) {
 
 
         Review review = new Review();
-        User user = userService.findById(userId);
-        Restaurant restaurant = restaurantService.findById(restaurantId);
-        review.setUser(user);
-        review.setRestaurant(restaurant);
+//        User user = userService.findById(userId);
+//        Restaurant restaurant = restaurantService.findById(restaurantId);
+//        review.setUser(user);
+//        review.setRestaurant(restaurant);
         review.setRating(reviewDto.getRating());
         review.setComment(reviewDto.getComment());
         review.setAverageCheck(reviewDto.getAverageCheck());
@@ -63,7 +67,7 @@ public class ReviewController {
         review.setComment(reviewDto.getComment());
         review.setRating(reviewDto.getRating());
         review.setAverageCheck(reviewDto.getAverageCheck());
-        reviewService.update(id,review);
+        reviewService.update(id, review);
     }
 
     @DeleteMapping("/{id}")

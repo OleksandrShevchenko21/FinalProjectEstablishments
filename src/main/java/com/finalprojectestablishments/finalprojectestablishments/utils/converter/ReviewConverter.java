@@ -18,8 +18,9 @@ public class ReviewConverter {
 
         ReviewDto dto = new ReviewDto();
         dto.setId(review.getId());
-        dto.setUserId(review.getUser().getId());
-        dto.setRestaurantId(review.getRestaurant().getId());
+//        dto.setUserId(review.getUser().getId());
+//        dto.setRestaurantId(review.getRestaurant().getId());
+//        dto.setRestaurantId(47);
         dto.setComment(review.getComment());
         dto.setRating(review.getRating());
         dto.setAverageCheck(review.getAverageCheck());

@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 //    "reservationDateTime" : "2023-03-06T15:30:00",
 @RestController
 @AllArgsConstructor
@@ -38,17 +39,19 @@ public class BookingController {
         return new ResponseEntity<>(bookingDto, HttpStatus.valueOf(200));
     }
 
-    @PostMapping("/{userId}/{restaurantId}")
+    //    @PostMapping("/{userId}/{restaurantId}")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public void saveBooking(@PathVariable int userId,
-                            @PathVariable int restaurantId,
-                            @RequestBody BookingDto bookingDto) {
+    public void saveReview(
+            @PathVariable int restaurantId,
+//            @PathVariable int userId,
+            @RequestBody BookingDto bookingDto) {
 
 
         Booking booking = new Booking();
-        User user = userService.findById(userId);
+//        User user = userService.findById(userId);
         Restaurant restaurant = restaurantService.findById(restaurantId);
-        booking.setUser(user);
+//        booking.setUser(user);
         booking.setRestaurant(restaurant);
         booking.setReservationDateTime(bookingDto.getReservationDateTime());
         booking.setPurpose(bookingDto.getPurpose());

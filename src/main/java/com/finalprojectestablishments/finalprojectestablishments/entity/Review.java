@@ -21,14 +21,14 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = true)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_id", nullable = true)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//
+//    private User user;
 
-    private User user;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restaurant_id", nullable = false)
+    @JoinColumn(name = "restaurant_id", nullable = true)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
     private Restaurant restaurant;
@@ -38,7 +38,7 @@ public class Review {
 
     private String comment;
 
-    private BigDecimal averageCheck;
+    private Double averageCheck;
 
 }
 
