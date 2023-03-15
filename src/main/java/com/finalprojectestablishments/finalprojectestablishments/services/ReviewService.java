@@ -23,6 +23,11 @@ public class ReviewService {
         return reviewDao.findAll();
     }
 
+    public List<Review> findByRestaurantId(int restaurantId) {
+        return reviewDao.findByRestaurantId(restaurantId);
+    }
+
+
     public Review findById(int id) {
         return reviewDao.findById(id).get();
     }

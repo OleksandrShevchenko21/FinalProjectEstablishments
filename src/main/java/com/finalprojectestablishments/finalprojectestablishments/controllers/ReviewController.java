@@ -27,9 +27,15 @@ public class ReviewController {
     private RestaurantService restaurantService;
     private ReviewConverter reviewConvertor;
 
-    @GetMapping("")
-    public ResponseEntity<List<ReviewDto>> getAllReviews() {
-        List<Review> reviews = reviewService.findAll();
+//    @GetMapping("")
+//    public ResponseEntity<List<ReviewDto>> getAllReviews() {
+//        List<Review> reviews = reviewService.findAll();
+//        List<ReviewDto> reviewDto = reviewConvertor.reviewListToReviewDtoList(reviews);
+//        return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
+//    }
+    @GetMapping("/restaurant/{restaurantId}")
+    public ResponseEntity<List<ReviewDto>> getAllReviews(@PathVariable int restaurantId) {
+        List<Review> reviews = reviewService.findByRestaurantId(restaurantId);
         List<ReviewDto> reviewDto = reviewConvertor.reviewListToReviewDtoList(reviews);
         return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
     }
@@ -42,19 +48,19 @@ public class ReviewController {
     }
 
     //    @PostMapping("/{userId}/{restaurantId}")
-    @PostMapping("")
+    @PostMapping("/restaurantId")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveReview(
-//            @PathVariable int restaurantId,
+            @PathVariable int restaurantId,
 //                           @PathVariable int userId
             @RequestBody ReviewDto reviewDto) {
 
 
         Review review = new Review();
 //        User user = userService.findById(userId);
-//        Restaurant restaurant = restaurantService.findById(restaurantId);
+        Restaurant restaurant = restaurantService.findById(restaurantId);
 //        review.setUser(user);
-//        review.setRestaurant(restaurant);
+        review.setRestaurant(restaurant);
         review.setRating(reviewDto.getRating());
         review.setComment(reviewDto.getComment());
         review.setAverageCheck(reviewDto.getAverageCheck());
