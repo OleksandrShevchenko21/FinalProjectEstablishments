@@ -13,11 +13,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/reviews")
+@RequestMapping("/api/reviews/restaurant")
 
 @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class ReviewController {
@@ -27,20 +28,20 @@ public class ReviewController {
     private RestaurantService restaurantService;
     private ReviewConverter reviewConvertor;
 
-//    @GetMapping("")
-//    public ResponseEntity<List<ReviewDto>> getAllReviews() {
-//        List<Review> reviews = reviewService.findAll();
-//        List<ReviewDto> reviewDto = reviewConvertor.reviewListToReviewDtoList(reviews);
-//        return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
-//    }
-    @GetMapping("/restaurant/{restaurantId}")
-    public ResponseEntity<List<ReviewDto>> getAllReviews(@PathVariable int restaurantId) {
+    @GetMapping("")
+    public ResponseEntity<List<ReviewDto>> getAllReviews() {
+        List<Review> reviews = reviewService.findAll();
+        List<ReviewDto> reviewDto = reviewConvertor.reviewListToReviewDtoList(reviews);
+        return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
+    }
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<List<ReviewDto>> getAllReviewsByRestaurantID(@PathVariable int restaurantId) {
         List<Review> reviews = reviewService.findByRestaurantId(restaurantId);
         List<ReviewDto> reviewDto = reviewConvertor.reviewListToReviewDtoList(reviews);
         return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/one/{id}")
     public ResponseEntity<ReviewDto> getOneReview(@PathVariable int id) {
         Review review = reviewService.findById(id);
         ReviewDto reviewDto = reviewConvertor.reviewToReviewDto(review);
@@ -48,7 +49,7 @@ public class ReviewController {
     }
 
     //    @PostMapping("/{userId}/{restaurantId}")
-    @PostMapping("/restaurantId")
+    @PostMapping("/{restaurantId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveReview(
             @PathVariable int restaurantId,
@@ -75,7 +76,7 @@ public class ReviewController {
         review.setAverageCheck(reviewDto.getAverageCheck());
         reviewService.update(id, review);
     }
-
+    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public void deleteReview(@PathVariable int id) {
 
