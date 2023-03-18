@@ -69,7 +69,7 @@ public List<RestaurantDto> findAll() {
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
 
-    public List<RestaurantDto> getRestaurantsByRatingGreaterThanEqual(int minRating) {
+    public List<RestaurantDto> getRestaurantsByRatingGreaterThanEqual(Double minRating) {
         List<RestaurantDto> restaurants = restaurantDao.findByRatingGreaterThanEqual(minRating);
         return restaurants;
     }

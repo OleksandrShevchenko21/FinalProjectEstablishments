@@ -40,7 +40,7 @@ public interface RestaurantDao extends JpaRepository<Restaurant, Integer> {
     @Query("SELECT new com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto" +
             "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck) " +
             "FROM Restaurant r JOIN r.reviews rv GROUP BY r.id HAVING AVG(rv.rating) >= :minRating")
-    List<RestaurantDto> findByRatingGreaterThanEqual(@Param("minRating") int minRating);
+    List<RestaurantDto> findByRatingGreaterThanEqual(@Param("minRating") Double minRating);
 
 
     List<Restaurant> findByType(String type);

@@ -32,10 +32,6 @@ public class RestaurantDto {
 
     }
 
-    public RestaurantDto(Restaurant restaurant) {
-
-    }
-
 
     //
 //    private List<Review> reviews;

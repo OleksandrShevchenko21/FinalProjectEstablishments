@@ -182,19 +182,19 @@ public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
 //        return restaurantService.getRestaurantsDateOfPublishDesc();
 //    }
 
-    @GetMapping("/sorted-by-order-by-name=asc")
+    @GetMapping("/sorted-by-order-by-name/asc")
     public List<RestaurantDto> getRestaurantsSortedByNameAsc() {
         return restaurantService.getRestaurantsOrderByNameAsc();
     }
 
-    @GetMapping("/sorted-by-order-by-name=desc")
+    @GetMapping("/sorted-by-order-by-name/desc")
     public List<RestaurantDto> getRestaurantsSortedByNameDesc() {
         return restaurantService.getRestaurantsOrderByNameDesc();
     }
 
     @GetMapping("/filter/average-rating")
 //    {{jserver}}/api/restaurants/filter/average-rating?minRating=60
-    public List<RestaurantDto> getRestaurantsByRatingGreaterThanEqual(@RequestParam int minRating) {
+    public List<RestaurantDto> getRestaurantsByRatingGreaterThanEqual(@RequestParam Double minRating) {
         return restaurantService.getRestaurantsByRatingGreaterThanEqual(minRating);
     }
 
