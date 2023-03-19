@@ -35,5 +35,4 @@ public class BookingService {
     public void delete(int id) {
         bookingDao.deleteById(id);
     }
-
 }

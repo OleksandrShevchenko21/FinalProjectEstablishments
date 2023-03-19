@@ -56,5 +56,4 @@ public class UserController {
         userService.deleteById(id);
 
     }
-
 }

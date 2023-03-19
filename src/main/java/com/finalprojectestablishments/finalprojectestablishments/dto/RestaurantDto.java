@@ -32,5 +32,4 @@ public class RestaurantDto {
     public RestaurantDto(RestaurantDto restaurantDto) {
 
     }
-
 }

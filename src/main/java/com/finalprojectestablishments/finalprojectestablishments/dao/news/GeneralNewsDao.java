@@ -7,9 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GeneralNewsDao extends JpaRepository<GeneralNews,Integer> {
-//    Optional<GeneralNews> findById(int id);
-//
-//    void save(GeneralNews generalNews);
-//
-//    void deleteById(int id);
+
 }

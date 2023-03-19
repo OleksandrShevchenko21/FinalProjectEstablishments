@@ -30,5 +30,4 @@ public class GeneralNews {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
     private Restaurant restaurant;
-
 }

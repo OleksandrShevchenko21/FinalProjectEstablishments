@@ -7,9 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PromotionNewsDao extends JpaRepository<PromotionNews,Integer> {
-//    Optional<PromotionNews> findById(int id);
-//
-//    void save(PromotionNews promotionNews);
-//
-//    void deleteById(int id);
+
 }

@@ -207,5 +207,4 @@ public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
     public List<RestaurantDto> getRestaurantsByName(@RequestParam String restaurantName) {
         return restaurantService.getRestaurantsByName(restaurantName);
     }
-
 }

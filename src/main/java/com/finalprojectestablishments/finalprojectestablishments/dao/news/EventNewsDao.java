@@ -7,9 +7,4 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventNewsDao extends JpaRepository<EventNews,Integer> {
-//    Optional<EventNews> findById(int id);
-//
-//    void save(EventNews eventNews);
-//
-//    void deleteById(int id);
 }

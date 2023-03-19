@@ -29,5 +29,4 @@ public class EventNews {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
     private Restaurant restaurant;
-
 }

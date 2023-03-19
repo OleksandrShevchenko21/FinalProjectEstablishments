@@ -48,5 +48,4 @@ public class Booking {
     private String whoPays;
 
     private double desiredExpenses;
-
 }

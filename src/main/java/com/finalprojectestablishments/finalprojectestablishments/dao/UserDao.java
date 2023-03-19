@@ -7,10 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserDao extends JpaRepository<User, Integer> {
-//    Optional<User> findById(int id);
-//
-//    void save(User user);
-//
-//    void deleteById(int id);
 
 }

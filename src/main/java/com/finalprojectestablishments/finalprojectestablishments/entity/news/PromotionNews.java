@@ -27,5 +27,4 @@ public class PromotionNews {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 
     private Restaurant restaurant;
-
 }

@@ -55,9 +55,6 @@ public interface RestaurantDao extends JpaRepository<Restaurant, Integer> {
     //    List<Restaurant> findByRestaurantName(String restaurantName);
     @Query("SELECT r FROM Restaurant r WHERE LOWER(r.restaurantName) LIKE :name%")
     List<Restaurant> findByRestaurantByName(@Param("name") String name);
-//    List<Restaurant> findByAverageCheckGreaterThanEqual(double minAvgCheck);
-//    List<Restaurant> findByAverageCheckLessThanEqual(double maxAvgCheck);
-
 
 }
 

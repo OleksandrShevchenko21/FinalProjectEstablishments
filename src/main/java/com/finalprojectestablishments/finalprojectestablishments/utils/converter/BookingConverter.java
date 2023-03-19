@@ -25,7 +25,6 @@ public class BookingConverter {
 
         return dto;
     }
-
     public List<BookingDto> bookingListToBookingDtoList(List<Booking> bookingList) {
         return bookingList.stream().map(this::bookingToBookingDto).collect(Collectors.toList());
     }

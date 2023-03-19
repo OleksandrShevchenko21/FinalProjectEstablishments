@@ -27,4 +27,5 @@ public class NewsDto {
 
 
     private int restaurantId;
+
 }

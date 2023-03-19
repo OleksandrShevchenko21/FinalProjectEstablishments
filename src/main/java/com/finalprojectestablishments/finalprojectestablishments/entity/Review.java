@@ -39,6 +39,5 @@ public class Review {
     private String comment;
 
     private Double averageCheck;
-
 }
 

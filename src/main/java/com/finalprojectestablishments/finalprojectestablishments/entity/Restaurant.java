@@ -80,5 +80,4 @@ public class Restaurant {
 //    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
 //    @JsonIgnoreProperties({"restaurant"})
 //    private List<FavoritesRestaurant> favorites = new ArrayList<>();
-
 }

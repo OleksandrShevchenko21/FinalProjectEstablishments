@@ -8,9 +8,5 @@ import java.util.Optional;
 
 public interface ReviewDao extends JpaRepository<Review, Integer> {
     List<Review> findByRestaurantId(int restaurantId);
-//    Optional<Review> findById(int id);
-//
-//    void save(Review review);
-//
-//    void deleteById(int id);
+
 }

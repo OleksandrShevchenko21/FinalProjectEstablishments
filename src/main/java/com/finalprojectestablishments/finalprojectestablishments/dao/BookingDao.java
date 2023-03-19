@@ -7,10 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookingDao extends JpaRepository<Booking,Integer> {
-//    Optional<Booking> findById(int id);
-//
-//    void save(Booking booking);
-//
-//    void deleteById(int id);
+
 }
 

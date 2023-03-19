@@ -44,5 +44,4 @@ public class ReviewService {
     public void delete(int id) {
         reviewDao.deleteById(id);
     }
-
 }

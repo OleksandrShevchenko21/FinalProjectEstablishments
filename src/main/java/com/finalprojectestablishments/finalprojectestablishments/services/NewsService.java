@@ -75,4 +75,5 @@ public List<PromotionNews> findAllPromotion() {
     public void deleteEvent(int id) {
         eventNewsDao.deleteById(id);
     }
+
 }

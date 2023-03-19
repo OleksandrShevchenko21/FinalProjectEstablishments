@@ -36,4 +36,5 @@ public class BookingDto {
     private String whoPays;
 
     private double desiredExpenses;
+
 }
