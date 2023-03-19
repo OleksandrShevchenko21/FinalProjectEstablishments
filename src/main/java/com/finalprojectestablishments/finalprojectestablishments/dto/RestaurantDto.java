@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -25,17 +26,11 @@ public class RestaurantDto {
 
     private String contacts;
 
-    //    private Double averageRating;
     private Double averageCheck;
 
+    private LocalDate dateOfPublish;
     public RestaurantDto(RestaurantDto restaurantDto) {
 
     }
-
-
-    //
-//    private List<Review> reviews;
-
-    // constructors, getters, and setters
 
 }

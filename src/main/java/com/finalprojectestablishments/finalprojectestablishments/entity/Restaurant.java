@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -53,6 +53,9 @@ public class Restaurant {
     //    @NotBlank
     @Column(nullable = true)
     private Double averageCheck;
+
+    @Column(nullable = true)
+    private LocalDate dateOfPublish;
 
     @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
     @JsonIgnoreProperties("restaurant")

@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,28 +27,36 @@ public interface RestaurantDao extends JpaRepository<Restaurant, Integer> {
 //    List<RestaurantDto> findAllByOrderByRatingAsc();
 
     @Query("SELECT new com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto" +
-            "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck) " +
+            "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck,r.dateOfPublish) " +
             "FROM Restaurant r LEFT JOIN r.reviews rev GROUP BY r.id ORDER BY AVG(rev.rating) ASC")
     List<RestaurantDto> findAllByOrderByRatingAsc();
 
 
-    //    List<Restaurant> findAllByOrderByDateOfPublishAsc();
-//    List<Restaurant> findAllByOrderByDateOfPublishDesc();
-//
+    List<Restaurant> findAllByOrderByDateOfPublishAsc();
+
+    List<Restaurant> findAllByOrderByDateOfPublishDesc();
+
+
+    //
     List<Restaurant> findAllByOrderByRestaurantNameAsc();
+
     List<Restaurant> findAllByOrderByRestaurantNameDesc();
 
     @Query("SELECT new com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto" +
-            "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck) " +
+            "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck,r.dateOfPublish) " +
             "FROM Restaurant r JOIN r.reviews rv GROUP BY r.id HAVING AVG(rv.rating) >= :minRating")
-    List<RestaurantDto> findByRatingGreaterThanEqual(@Param("minRating") Double minRating);
+    List<RestaurantDto> findByRatingGreaterThanEqual(@Param("minRating") double minRating);
 
 
     List<Restaurant> findByType(String type);
 
     List<Restaurant> findByAverageCheckBetween(Double minAvgCheck, Double maxAvgCheck);
-    List<Restaurant> findByAverageCheckGreaterThanEqual(Double minAvgCheck);
-    List<Restaurant> findByAverageCheckLessThanEqual(Double maxAvgCheck);
+
+    //    List<Restaurant> findByRestaurantName(String restaurantName);
+    @Query("SELECT r FROM Restaurant r WHERE LOWER(r.restaurantName) LIKE :name%")
+    List<Restaurant> findByRestaurantByName(@Param("name") String name);
+//    List<Restaurant> findByAverageCheckGreaterThanEqual(double minAvgCheck);
+//    List<Restaurant> findByAverageCheckLessThanEqual(double maxAvgCheck);
 
 
 }

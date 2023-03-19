@@ -1,11 +1,7 @@
 package com.finalprojectestablishments.finalprojectestablishments.utils.converter;
 
-import com.finalprojectestablishments.finalprojectestablishments.dto.BookingDto;
 import com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto;
-import com.finalprojectestablishments.finalprojectestablishments.dto.ReviewDto;
-import com.finalprojectestablishments.finalprojectestablishments.entity.Booking;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
-import com.finalprojectestablishments.finalprojectestablishments.entity.Review;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,6 +19,7 @@ public class RestaurantsConverter {
         dto.setSchedule(restaurant.getSchedule());
         dto.setContacts(restaurant.getContacts());
         dto.setAverageCheck(restaurant.getAverageCheck());
+        dto.setDateOfPublish(restaurant.getDateOfPublish());
 //        List<ReviewDto> reviewDtoList = restaurant.getReviews().stream()
 //                .map(review -> reviewConverter.reviewToReviewDto(review))
 //                .collect(Collectors.toList());
