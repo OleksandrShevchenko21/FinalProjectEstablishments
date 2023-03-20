@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/booking")
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class BookingController {
     private BookingService bookingService;
     private UserService userService;
@@ -40,7 +41,7 @@ public class BookingController {
     }
 
     //    @PostMapping("/{userId}/{restaurantId}")
-    @PostMapping("")
+    @PostMapping("/restaurant/{restaurantId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveReview(
             @PathVariable int restaurantId,

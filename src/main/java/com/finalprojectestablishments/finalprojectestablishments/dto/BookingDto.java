@@ -17,7 +17,7 @@ public class BookingDto {
 
     private int id;
 
-    private int userId;
+//    private int userId;
 
     private int restaurantId;
 
