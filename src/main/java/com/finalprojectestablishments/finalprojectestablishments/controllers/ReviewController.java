@@ -34,6 +34,7 @@ public class ReviewController {
         List<ReviewDto> reviewDto = reviewConvertor.reviewListToReviewDtoList(reviews);
         return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
     }
+
     @GetMapping("/{restaurantId}")
     public ResponseEntity<List<ReviewDto>> getAllReviewsByRestaurantID(@PathVariable int restaurantId) {
         List<Review> reviews = reviewService.findByRestaurantId(restaurantId);
@@ -48,19 +49,19 @@ public class ReviewController {
         return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
     }
 
-    //    @PostMapping("/{userId}/{restaurantId}")
-    @PostMapping("/{restaurantId}")
+    @PostMapping("/{restaurantId}/{userName}")
+//    @PostMapping("/{restaurantId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveReview(
             @PathVariable int restaurantId,
-//                           @PathVariable int userId
+            @PathVariable String userName,
             @RequestBody ReviewDto reviewDto) {
 
 
         Review review = new Review();
-//        User user = userService.findById(userId);
+        User user = userService.findByUserName(userName);
         Restaurant restaurant = restaurantService.findById(restaurantId);
-//        review.setUser(user);
+        review.setUser(user);
         review.setRestaurant(restaurant);
         review.setRating(reviewDto.getRating());
         review.setComment(reviewDto.getComment());
@@ -76,6 +77,7 @@ public class ReviewController {
         review.setAverageCheck(reviewDto.getAverageCheck());
         reviewService.update(id, review);
     }
+
     @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public void deleteReview(@PathVariable int id) {

@@ -27,10 +27,10 @@ public class ReviewService {
         return reviewDao.findByRestaurantId(restaurantId);
     }
 
-
     public Review findById(int id) {
         return reviewDao.findById(id).get();
     }
+
 
     public void save(Review review) {
 

@@ -22,7 +22,7 @@ public class ReviewDto {
 //    @DecimalMin(1.0)
     private int rating;
 //    @NotNull
-//    private int userId;
+    private String userName;
 //    @NotNull
     private int restaurantId;
 //    @NotNull

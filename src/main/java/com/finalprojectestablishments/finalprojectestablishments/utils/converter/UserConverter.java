@@ -4,12 +4,14 @@ import com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantD
 import com.finalprojectestablishments.finalprojectestablishments.dto.UserDto;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
 import com.finalprojectestablishments.finalprojectestablishments.entity.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 @Component
 public class UserConverter {
+
     public UserDto userToUserDto(User user) {
         UserDto dto = new UserDto();
         dto.setId(user.getId());
