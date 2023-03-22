@@ -1,13 +1,14 @@
 package com.finalprojectestablishments.finalprojectestablishments.dto;
 
-import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
+
+import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
+
 
 @Getter
 @Setter
@@ -15,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 
 public class RestaurantDto {
+
     private int id;
     private String restaurantName;
 
@@ -29,6 +31,8 @@ public class RestaurantDto {
     private Double averageCheck;
 
     private LocalDate dateOfPublish;
+
+    private Double averageRating;
     public RestaurantDto(RestaurantDto restaurantDto) {
 
     }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//    "reservationDateTime" : "2023-03-06T15:30:00",
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/booking")

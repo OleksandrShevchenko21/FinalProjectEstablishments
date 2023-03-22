@@ -140,6 +140,8 @@ public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
         restaurant.setContacts(restaurantDto.getContacts());
         restaurant.setAverageCheck(restaurantDto.getAverageCheck());
         restaurant.setDateOfPublish(LocalDate.now());
+//        Double avgRating = restaurantService.getAvgRating(restaurant.getId());
+//        restaurant.setAverageRating(restaurantDto.getAverageRating());
 
         restaurantService.save(restaurant);
     }

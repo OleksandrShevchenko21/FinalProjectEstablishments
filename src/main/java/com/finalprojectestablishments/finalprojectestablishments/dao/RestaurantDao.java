@@ -27,7 +27,7 @@ public interface RestaurantDao extends JpaRepository<Restaurant, Integer> {
 //    List<RestaurantDto> findAllByOrderByRatingAsc();
 
     @Query("SELECT new com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto" +
-            "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck,r.dateOfPublish) " +
+            "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck,r.dateOfPublish,r.averageRating) " +
             "FROM Restaurant r LEFT JOIN r.reviews rev GROUP BY r.id ORDER BY AVG(rev.rating) ASC")
     List<RestaurantDto> findAllByOrderByRatingAsc();
 
@@ -43,7 +43,7 @@ public interface RestaurantDao extends JpaRepository<Restaurant, Integer> {
     List<Restaurant> findAllByOrderByRestaurantNameDesc();
 
     @Query("SELECT new com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto" +
-            "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck,r.dateOfPublish) " +
+            "(r.id, r.restaurantName, r.type, r.address, r.schedule, r.contacts, r.averageCheck,r.dateOfPublish,r.averageRating) " +
             "FROM Restaurant r JOIN r.reviews rv GROUP BY r.id HAVING AVG(rv.rating) >= :minRating")
     List<RestaurantDto> findByRatingGreaterThanEqual(@Param("minRating") double minRating);
 
@@ -55,6 +55,9 @@ public interface RestaurantDao extends JpaRepository<Restaurant, Integer> {
     //    List<Restaurant> findByRestaurantName(String restaurantName);
     @Query("SELECT r FROM Restaurant r WHERE LOWER(r.restaurantName) LIKE :name%")
     List<Restaurant> findByRestaurantByName(@Param("name") String name);
+
+    @Query("SELECT AVG(r.rating) FROM Review r WHERE r.restaurant.id = :restaurantId")
+    Double getAvgRatingByRestaurantId(int restaurantId);
 
 }
 

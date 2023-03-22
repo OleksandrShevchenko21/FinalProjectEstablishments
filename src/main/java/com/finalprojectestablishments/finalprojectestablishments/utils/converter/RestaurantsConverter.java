@@ -1,15 +1,22 @@
 package com.finalprojectestablishments.finalprojectestablishments.utils.converter;
 
+import com.finalprojectestablishments.finalprojectestablishments.dao.RestaurantDao;
 import com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
+import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
 public class RestaurantsConverter {
-
+private RestaurantDao restaurantDao;
+//    public RestaurantsConverter(RestaurantService restaurantService) {
+//        this.restaurantService = restaurantService;
+//    }
     public RestaurantDto restaurantToRestaurantDto(Restaurant restaurant) {
         RestaurantDto dto = new RestaurantDto();
         dto.setId(restaurant.getId());
@@ -20,11 +27,10 @@ public class RestaurantsConverter {
         dto.setContacts(restaurant.getContacts());
         dto.setAverageCheck(restaurant.getAverageCheck());
         dto.setDateOfPublish(restaurant.getDateOfPublish());
-//        List<ReviewDto> reviewDtoList = restaurant.getReviews().stream()
-//                .map(review -> reviewConverter.reviewToReviewDto(review))
-//                .collect(Collectors.toList());
 
-//        dto.setReviews(restaurant.getReviews());
+        Double avgRating = restaurantDao.getAvgRatingByRestaurantId(restaurant.getId());
+        dto.setAverageRating(avgRating);
+
         return dto;
     }
 

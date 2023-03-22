@@ -106,6 +106,10 @@ public List<RestaurantDto> findAll() {
 //        List<Restaurant> restaurants = restaurantDao.findByRestaurantName(restaurantName);
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
+
+    public double getAvgRatingByRestaurantId(int id) {
+    return restaurantDao.getAvgRatingByRestaurantId(id);
+    }
 }
 
 
