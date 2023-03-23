@@ -59,5 +59,9 @@ public interface RestaurantDao extends JpaRepository<Restaurant, Integer> {
     @Query("SELECT AVG(r.rating) FROM Review r WHERE r.restaurant.id = :restaurantId")
     Double getAvgRatingByRestaurantId(int restaurantId);
 
+//    List<Restaurant> findByUsers_UserName(String userName);
+@Query("SELECT r FROM Restaurant r JOIN r.users u WHERE u.userName = :userName")
+List<Restaurant> findFavoriteRestaurantsByUserName(@Param("userName") String userName);
+
 }
 

@@ -17,7 +17,7 @@ public class BookingDto {
 
     private int id;
 
-//    private int userId;
+    private String userName;
 
     private int restaurantId;
 

@@ -20,7 +20,7 @@ public class BookingConverter {
         dto.setNumPeople(booking.getNumPeople());
         dto.setWhoPays(booking.getWhoPays());
         dto.setDesiredExpenses(booking.getDesiredExpenses());
-//        dto.setUserId(booking.getUser().getId());
+        dto.setUserName(booking.getUser().getUserName());
         dto.setRestaurantId(booking.getRestaurant().getId());
 
         return dto;

@@ -8,5 +8,7 @@ import java.util.Optional;
 
 public interface BookingDao extends JpaRepository<Booking,Integer> {
 
+    List<Booking> findByUser_UserName(String userName);
+
 }
 

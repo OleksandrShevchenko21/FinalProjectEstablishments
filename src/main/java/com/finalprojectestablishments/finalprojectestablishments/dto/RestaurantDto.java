@@ -33,6 +33,8 @@ public class RestaurantDto {
     private LocalDate dateOfPublish;
 
     private Double averageRating;
+
+//    private String userName;
     public RestaurantDto(RestaurantDto restaurantDto) {
 
     }

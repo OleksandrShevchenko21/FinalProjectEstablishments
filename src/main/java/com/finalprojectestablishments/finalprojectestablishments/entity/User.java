@@ -36,6 +36,18 @@ public class User {
     @JsonIgnoreProperties("user")
     private List<Review> reviews;
 
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
+    private List<Booking> bookings;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "favorites_restaurants",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns =  @JoinColumn(name = "restaurant_id")
+    )
+    private List<Restaurant> favoritesRestaurants;
+
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<FavoritesRestaurant> favoritesRestaurants = new ArrayList<>();
 }

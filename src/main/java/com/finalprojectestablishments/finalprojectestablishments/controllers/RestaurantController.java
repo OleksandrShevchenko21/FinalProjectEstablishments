@@ -2,10 +2,14 @@ package com.finalprojectestablishments.finalprojectestablishments.controllers;
 
 import com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
+import com.finalprojectestablishments.finalprojectestablishments.entity.User;
 import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
+import com.finalprojectestablishments.finalprojectestablishments.services.UserService;
 import com.finalprojectestablishments.finalprojectestablishments.utils.BuildPage;
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.RestaurantsConverter;
+
 import javax.servlet.http.HttpServletResponse;
+
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +26,12 @@ import java.util.List;
 public class RestaurantController {
 
     private RestaurantService restaurantService;
+    private UserService userService;
     private RestaurantsConverter restaurantsConverter;
     private BuildPage buildPage;
 
 
-//    GET /api/restaurants?page=1&size=10&minAvgCheck=10.0&maxAvgCheck=50.0&type=BAR&minRating=4
+    //    GET /api/restaurants?page=1&size=10&minAvgCheck=10.0&maxAvgCheck=50.0&type=BAR&minRating=4
 //
 //
 //    @GetMapping("")
@@ -101,25 +106,25 @@ public class RestaurantController {
 //        response.setHeader("link", buildPage.buildPageLinkHeader("/api/restaurants", allRestaurants));
 //        return new ResponseEntity<>(allRestaurants, HttpStatus.OK);
 //    }
-@GetMapping("")
-public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
+    @GetMapping("")
+    public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
 //            @PageableDefault(page = 0, size = 20,sort = {"id"},
 //                    direction = Sort.Direction.ASC) Pageable pageable,
 
-        @RequestParam(required = false) Double minAvgCheck,
-        @RequestParam(required = false) Double maxAvgCheck,
-        @RequestParam(required = false) String type,
-        @RequestParam(required = false) Integer minRating,
-        HttpServletResponse response) {
+//            @RequestParam(required = false) Double minAvgCheck,
+//            @RequestParam(required = false) Double maxAvgCheck,
+//            @RequestParam(required = false) String type,
+//            @RequestParam(required = false) Integer minRating,
+//            HttpServletResponse response
+    ) {
 
 
+        List<RestaurantDto> restaurants;
+        restaurants = restaurantService.findAll();
 
-    List<RestaurantDto> restaurants;
-    restaurants = restaurantService.findAll();
 
-
-    return new ResponseEntity<>(restaurants, HttpStatus.OK);
-}
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<RestaurantDto> getOneRestaurant(@PathVariable int id) {
@@ -140,9 +145,6 @@ public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
         restaurant.setContacts(restaurantDto.getContacts());
         restaurant.setAverageCheck(restaurantDto.getAverageCheck());
         restaurant.setDateOfPublish(LocalDate.now());
-//        Double avgRating = restaurantService.getAvgRating(restaurant.getId());
-//        restaurant.setAverageRating(restaurantDto.getAverageRating());
-
         restaurantService.save(restaurant);
     }
 
@@ -173,6 +175,7 @@ public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
     public List<RestaurantDto> getRestaurantsSortedByDateOfPublishAsc() {
         return restaurantService.getRestaurantsDateOfPublishAsc();
     }
+
     @GetMapping("/sorted-by-date-of-publish=desc")
     public List<RestaurantDto> getRestaurantsSortedByDateOfPublishDesc() {
         return restaurantService.getRestaurantsDateOfPublishDesc();
@@ -199,14 +202,36 @@ public ResponseEntity<List<RestaurantDto>> getAllRestaurants(
     public List<RestaurantDto> getRestaurantsByType(@RequestParam String type) {
         return restaurantService.getRestaurantsByType(type);
     }
+
     @GetMapping("/filter/average-check/between")
 //    {{jserver}}/api/restaurants/filter/average-check/between?minAvgCheck=50.0&maxAvgCheck=100.0
     public List<RestaurantDto> getRestaurantsByAverageCheckBetween(@RequestParam Double minAvgCheck, Double maxAvgCheck) {
-        return restaurantService.findByAverageCheckBetween(minAvgCheck,maxAvgCheck);
+        return restaurantService.findByAverageCheckBetween(minAvgCheck, maxAvgCheck);
     }
+
     @GetMapping("/filter/name")
 
     public List<RestaurantDto> getRestaurantsByName(@RequestParam String restaurantName) {
         return restaurantService.getRestaurantsByName(restaurantName);
     }
+
+    @GetMapping("/username/{userName}")
+//    {{jserver}}/api/restaurants/username/admin
+    public ResponseEntity<List<RestaurantDto>> getRestaurantsByUserName(@PathVariable String userName) {
+        List<RestaurantDto> restaurants = restaurantService.getRestaurantsByUserName(userName);
+
+        return new ResponseEntity<>(restaurants, HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}/username/{userName}")
+    public void addRestaurantsToFavoritesByUser(@PathVariable int id,
+                                                @PathVariable String userName,
+                                                @RequestBody RestaurantDto restaurantDto) {
+        Restaurant restaurant = restaurantService.findById(id);
+        User user = userService.findByUserName(userName);
+        user.getFavoritesRestaurants().add(restaurant);
+        userService.save(user);
+    }
+
+
 }

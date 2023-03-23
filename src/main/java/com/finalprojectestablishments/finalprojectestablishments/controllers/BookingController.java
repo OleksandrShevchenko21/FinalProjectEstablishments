@@ -1,8 +1,10 @@
 package com.finalprojectestablishments.finalprojectestablishments.controllers;
 
 import com.finalprojectestablishments.finalprojectestablishments.dto.BookingDto;
+import com.finalprojectestablishments.finalprojectestablishments.dto.ReviewDto;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Booking;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
+import com.finalprojectestablishments.finalprojectestablishments.entity.Review;
 import com.finalprojectestablishments.finalprojectestablishments.entity.User;
 import com.finalprojectestablishments.finalprojectestablishments.services.BookingService;
 import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
@@ -31,6 +33,12 @@ public class BookingController {
         List<BookingDto> bookingDtoList = bookingConverter.bookingListToBookingDtoList(reviews);
         return new ResponseEntity<>(bookingDtoList, HttpStatus.valueOf(200));
     }
+    @GetMapping("/userName/{userName}")
+    public ResponseEntity<List<BookingDto>> getAllBookingsByUserName(@PathVariable String userName) {
+        List<Booking> bookings = bookingService.findByUserName(userName);
+        List<BookingDto> bookingDto = bookingConverter.bookingListToBookingDtoList(bookings);
+        return new ResponseEntity<>(bookingDto, HttpStatus.valueOf(200));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<BookingDto> getOneBooking(@PathVariable int id) {
@@ -40,18 +48,18 @@ public class BookingController {
     }
 
     //    @PostMapping("/{userId}/{restaurantId}")
-    @PostMapping("/restaurant/{restaurantId}")
+    @PostMapping("/restaurant/{restaurantId}/{userName}")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveReview(
             @PathVariable int restaurantId,
-//            @PathVariable int userId,
+            @PathVariable String userName,
             @RequestBody BookingDto bookingDto) {
 
 
         Booking booking = new Booking();
-//        User user = userService.findById(userId);
+        User user = userService.findByUserName(userName);
         Restaurant restaurant = restaurantService.findById(restaurantId);
-//        booking.setUser(user);
+        booking.setUser(user);
         booking.setRestaurant(restaurant);
         booking.setReservationDateTime(bookingDto.getReservationDateTime());
         booking.setPurpose(bookingDto.getPurpose());

@@ -12,6 +12,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -110,6 +111,22 @@ public List<RestaurantDto> findAll() {
     public double getAvgRatingByRestaurantId(int id) {
     return restaurantDao.getAvgRatingByRestaurantId(id);
     }
+
+//    public List<RestaurantDto> getRestaurantsByUserName(String userName) {
+//        List<Restaurant> restaurants = restaurantDao.findFavoriteRestaurantsByUserName(userName);
+//        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
+//    }
+public List<RestaurantDto> getRestaurantsByUserName(String userName) {
+    List<Restaurant> restaurants = restaurantDao.findFavoriteRestaurantsByUserName(userName);
+    List<RestaurantDto> favoriteRestaurants = new ArrayList<>();
+
+    for (Restaurant restaurant : restaurants) {
+        RestaurantDto restaurantDto = restaurantsConverter.restaurantToRestaurantDto(restaurant);
+        favoriteRestaurants.add(restaurantDto);
+    }
+
+    return favoriteRestaurants;
+}
 }
 
 

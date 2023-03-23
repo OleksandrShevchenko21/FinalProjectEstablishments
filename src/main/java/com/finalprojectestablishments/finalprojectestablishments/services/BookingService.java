@@ -35,4 +35,8 @@ public class BookingService {
     public void delete(int id) {
         bookingDao.deleteById(id);
     }
+
+    public List<Booking> findByUserName(String userName) {
+        return bookingDao.findByUser_UserName(userName);
+    }
 }

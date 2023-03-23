@@ -27,9 +27,10 @@ private RestaurantDao restaurantDao;
         dto.setContacts(restaurant.getContacts());
         dto.setAverageCheck(restaurant.getAverageCheck());
         dto.setDateOfPublish(restaurant.getDateOfPublish());
-
         Double avgRating = restaurantDao.getAvgRatingByRestaurantId(restaurant.getId());
         dto.setAverageRating(avgRating);
+//        String userName = restaurant.getUsers().stream().findFirst().map(user -> user.getUserName()).orElse(null);
+//        dto.setUserName(userName);
 
         return dto;
     }

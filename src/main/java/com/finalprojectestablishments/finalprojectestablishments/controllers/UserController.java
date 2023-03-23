@@ -1,7 +1,10 @@
 package com.finalprojectestablishments.finalprojectestablishments.controllers;
 
+import com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto;
 import com.finalprojectestablishments.finalprojectestablishments.dto.UserDto;
+import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
 import com.finalprojectestablishments.finalprojectestablishments.entity.User;
+import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
 import com.finalprojectestablishments.finalprojectestablishments.services.UserService;
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.UserConverter;
 import io.jsonwebtoken.JwtException;
