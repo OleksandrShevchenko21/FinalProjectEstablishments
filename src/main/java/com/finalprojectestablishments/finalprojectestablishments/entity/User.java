@@ -40,7 +40,7 @@ public class User {
     @JsonIgnoreProperties("user")
     private List<Booking> bookings;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany()
     @JoinTable(
             name = "favorites_restaurants",
             joinColumns = @JoinColumn(name = "user_id"),

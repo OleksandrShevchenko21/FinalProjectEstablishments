@@ -54,6 +54,12 @@ public class UserController {
         UserDto userDto = userConverter.userToUserDto(user);
         return new ResponseEntity<>(userDto, HttpStatus.valueOf(200));
     }
+    @GetMapping("/username/{userName}")
+    public ResponseEntity<UserDto> getUserbyUserName(@PathVariable String userName) {
+        User user = userService.findByName(userName);
+        UserDto userDto = userConverter.userToUserDto(user);
+        return new ResponseEntity<>(userDto, HttpStatus.valueOf(200));
+    }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
@@ -75,7 +81,8 @@ public class UserController {
 
             String jwtToken = Jwts.builder()
                     .setSubject(authenticate.getName())
-                    .setExpiration(new Date(new Date().getTime() + 2 * 60 * 1000))
+//                    .setRole(authenticate.getRole())
+                    .setExpiration(new Date(new Date().getTime() + 60 * 60 * 1000))
                     .signWith(SignatureAlgorithm.HS512, "gfl".getBytes(StandardCharsets.UTF_8))
                     .compact();
             System.out.println(jwtToken);
@@ -84,7 +91,7 @@ public class UserController {
             return new ResponseEntity<>("you are log in", headers, HttpStatus.ACCEPTED);
         }
 
-        return new ResponseEntity<>("zazazaz",HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
     @PatchMapping("/{id}")
@@ -101,4 +108,5 @@ public class UserController {
         userService.deleteById(id);
 
     }
+
 }

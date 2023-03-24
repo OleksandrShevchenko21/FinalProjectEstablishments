@@ -2,6 +2,7 @@ package com.finalprojectestablishments.finalprojectestablishments.configs.filter
 
 import com.finalprojectestablishments.finalprojectestablishments.dao.UserDao;
 import com.finalprojectestablishments.finalprojectestablishments.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -42,8 +43,14 @@ public class CustomFilter extends OncePerRequestFilter {
                     .parseClaimsJws(token)
                     .getBody()
                     .getSubject();
+//            String role = (String) Jwts.parser()
+//                    .setSigningKey("gfl".getBytes(StandardCharsets.UTF_8))
+//                    .parseClaimsJws(token)
+//                    .getBody()
+//                    .get("role");
 
-            System.out.println(subject);
+            System.out.println("subject: " + subject);
+//            System.out.println("role: " + role);
 
             User userByUsername = userDao.findUserByUserName(subject);
             System.out.println(userByUsername);

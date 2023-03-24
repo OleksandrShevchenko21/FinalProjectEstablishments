@@ -166,9 +166,13 @@ public class RestaurantController {
         restaurantService.deleteById(id);
     }
 
-    @GetMapping("/sorted-by-rating")
-    public List<RestaurantDto> getRestaurantsSortedByRating() {
-        return restaurantService.getRestaurantsSortedByRating();
+    @GetMapping("/sorted-by-rating-asc")
+    public List<RestaurantDto> getRestaurantsSortedByRatingAsc() {
+        return restaurantService.getRestaurantsSortedByRatingAsc();
+    }
+    @GetMapping("/sorted-by-rating-desc")
+    public List<RestaurantDto> getRestaurantsSortedByRatingDesc() {
+        return restaurantService.getRestaurantsSortedByRatingDesc();
     }
 
     @GetMapping("/sorted-by-date-of-publish=asc")
@@ -229,9 +233,25 @@ public class RestaurantController {
                                                 @RequestBody RestaurantDto restaurantDto) {
         Restaurant restaurant = restaurantService.findById(id);
         User user = userService.findByUserName(userName);
-        user.getFavoritesRestaurants().add(restaurant);
-        userService.save(user);
+        if (!user.getFavoritesRestaurants().contains(restaurant)) {
+
+            user.getFavoritesRestaurants().add(restaurant);
+            userService.save(user);
+        } else {
+            throw new IllegalArgumentException("Restaurant already exists in user's favorites.");
+        }
     }
-
-
+    @DeleteMapping("/{id}/delete/{userName}")
+    public void deleteRestaurantsFromFavoritesByUser(@PathVariable int id,
+                                                @PathVariable String userName
+                                               ) {
+        Restaurant restaurant = restaurantService.findById(id);
+        User user = userService.findByUserName(userName);
+        if (user.getFavoritesRestaurants().contains(restaurant)) {
+            user.getFavoritesRestaurants().remove(restaurant);
+            userService.save(user);
+        } else {
+            throw new IllegalArgumentException("Could not be removed.");
+        }
+    }
 }

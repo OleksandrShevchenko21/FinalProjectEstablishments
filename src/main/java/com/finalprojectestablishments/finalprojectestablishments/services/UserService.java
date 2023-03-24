@@ -40,6 +40,10 @@ public class UserService {
     public void deleteById(int id) {
         userDao.deleteById(id);
     }
+
+    public User findByName(String userName) {
+        return userDao.findUserByUserName(userName);
+    }
 }
 
 

@@ -49,8 +49,15 @@ public List<RestaurantDto> findAll() {
         restaurantDao.deleteById(id);
     }
 
-    public List<RestaurantDto> getRestaurantsSortedByRating() {
-        return restaurantDao.findAllByOrderByRatingAsc();
+    public List<RestaurantDto> getRestaurantsSortedByRatingAsc() {
+        List<Restaurant> restaurants = restaurantDao.findAllByOrderByRatingAsc();
+        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
+//        return restaurantDao.findAllByOrderByRatingAsc();
+    }
+    public List<RestaurantDto> getRestaurantsSortedByRatingDesc() {
+        List<Restaurant> restaurants = restaurantDao.findAllByOrderByRatingDesc();
+        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
+//        return restaurantDao.findAllByOrderByRatingAsc();
     }
     public List<RestaurantDto> getRestaurantsDateOfPublishAsc() {
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByDateOfPublishAsc();
@@ -73,8 +80,8 @@ public List<RestaurantDto> findAll() {
     }
 
     public List<RestaurantDto> getRestaurantsByRatingGreaterThanEqual(double minRating) {
-        List<RestaurantDto> restaurants = restaurantDao.findByRatingGreaterThanEqual(minRating);
-        return restaurants;
+        List<Restaurant> restaurants = restaurantDao.findByRatingGreaterThanEqual(minRating);
+        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
 
     public List<RestaurantDto> getRestaurantsByType(String type) {
@@ -98,14 +105,11 @@ public List<RestaurantDto> findAll() {
 //        Page<Restaurant> restaurants = restaurantDao.findByAverageCheckBetweenAndTypeAndRatingGreaterThanEqual(minAvgCheck, maxAvgCheck, type, minRating, pageable);
 //        return restaurants.map(this::convertToDto);
 //    }
-    private RestaurantDto convertToDto(Restaurant restaurant) {
-        return modelMapper.map(restaurant, RestaurantDto.class);
-    }
 
     public List<RestaurantDto> getRestaurantsByName(String restaurantName) {
         List<Restaurant> restaurants = restaurantDao.findByRestaurantByName(restaurantName);
-//        List<Restaurant> restaurants = restaurantDao.findByRestaurantName(restaurantName);
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
+//        return restaurantDao.findByRestaurantByName(restaurantName);
     }
 
     public double getAvgRatingByRestaurantId(int id) {
@@ -127,6 +131,9 @@ public List<RestaurantDto> getRestaurantsByUserName(String userName) {
 
     return favoriteRestaurants;
 }
+    private RestaurantDto convertToDto(Restaurant restaurant) {
+        return modelMapper.map(restaurant, RestaurantDto.class);
+    }
 }
 
 
