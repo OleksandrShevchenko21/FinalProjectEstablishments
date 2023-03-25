@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/news")
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
+//@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class NewsController {
 
     private NewsConverter newsConverter;

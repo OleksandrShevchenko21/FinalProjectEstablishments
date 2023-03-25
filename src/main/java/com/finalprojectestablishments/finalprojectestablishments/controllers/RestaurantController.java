@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/api/restaurants")
 @AllArgsConstructor
 
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
+//@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class RestaurantController {
 
     private RestaurantService restaurantService;

@@ -2,6 +2,9 @@ package com.finalprojectestablishments.finalprojectestablishments.entity;//packa
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +35,8 @@ public class Review {
     private Restaurant restaurant;
 
     @Column(nullable = false)
+    @Min(value = 1, message = "Rating must be between 1 and 5")
+    @Max(value = 5, message = "Rating must be between 1 and 5")
     private int rating;
 
     private String comment;

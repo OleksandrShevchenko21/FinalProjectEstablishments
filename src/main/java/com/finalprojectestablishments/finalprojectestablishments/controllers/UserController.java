@@ -29,7 +29,7 @@ import java.util.List;
 @RequestMapping("/api/users")
 @AllArgsConstructor
 
-@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
+//@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class UserController {
 
 
