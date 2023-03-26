@@ -18,6 +18,9 @@ public class UserConverter {
         dto.setUserName(user.getUserName());
         dto.setPassword(user.getPassword());
         dto.setRole(user.getRole());
+        dto.setRole(user.getRole());
+        dto.setNumber(user.getNumber());
+        dto.setEmail(user.getEmail());
 
         return dto;
     }

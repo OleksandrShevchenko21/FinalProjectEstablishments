@@ -1,6 +1,7 @@
 package com.finalprojectestablishments.finalprojectestablishments.services;
 
 import com.finalprojectestablishments.finalprojectestablishments.dao.UserDao;
+import com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto;
 import com.finalprojectestablishments.finalprojectestablishments.dto.UserDto;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
 import com.finalprojectestablishments.finalprojectestablishments.entity.User;
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,12 +39,19 @@ public class UserService {
         userDao.save(user);
     }
 
-    public void deleteById(int id) {
-        userDao.deleteById(id);
+//    public void deleteById(int id) {
+//        userDao.deleteById(id);
+//    }
+    public void deleteByUserName(String userName) {
+        userDao.removeUserByUserName(userName);
     }
 
     public User findByName(String userName) {
         return userDao.findUserByUserName(userName);
+    }
+    public List<User> findListByUserName(String userName) {
+
+        return userDao.findUsersByUserName(userName);
     }
 }
 

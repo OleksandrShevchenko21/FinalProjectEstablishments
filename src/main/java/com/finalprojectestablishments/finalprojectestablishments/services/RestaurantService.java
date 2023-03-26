@@ -22,11 +22,6 @@ public class RestaurantService {
     private RestaurantsConverter restaurantsConverter;
     private final ModelMapper modelMapper;
 
-//public Page<RestaurantDto> findAll(Pageable pageable) {
-//    Page<Restaurant> restaurants = restaurantDao.findAll(pageable);
-//    return restaurants.map(this::convertToDto);
-//
-//}
 public List<RestaurantDto> findAll() {
     List<Restaurant> restaurants = restaurantDao.findAll();
     return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
@@ -52,12 +47,10 @@ public List<RestaurantDto> findAll() {
     public List<RestaurantDto> getRestaurantsSortedByRatingAsc() {
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByRatingAsc();
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
-//        return restaurantDao.findAllByOrderByRatingAsc();
     }
     public List<RestaurantDto> getRestaurantsSortedByRatingDesc() {
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByRatingDesc();
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
-//        return restaurantDao.findAllByOrderByRatingAsc();
     }
     public List<RestaurantDto> getRestaurantsDateOfPublishAsc() {
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByDateOfPublishAsc();
@@ -74,7 +67,6 @@ public List<RestaurantDto> findAll() {
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
     public List<RestaurantDto> getRestaurantsOrderByNameDesc() {
-//        return restaurantDao.findAllByOrderByRestaurantNameDesc();
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByRestaurantNameDesc();
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
@@ -85,41 +77,24 @@ public List<RestaurantDto> findAll() {
     }
 
     public List<RestaurantDto> getRestaurantsByType(String type) {
-
         List<Restaurant> restaurants = restaurantDao.findByType(type);
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
-
-//    public Page<RestaurantDto> getRestaurantsByType(String type, Pageable pageable) {
-//
-//        Page<Restaurant> restaurants = restaurantDao.findByType(type,pageable);
-//        return restaurants.map(this::convertToDto);
-//    }
 
     public List<RestaurantDto> findByAverageCheckBetween(Double minAvgCheck, Double maxAvgCheck) {
         List<Restaurant> restaurants = restaurantDao.findByAverageCheckBetween(minAvgCheck, maxAvgCheck);
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
 
-//    public Page<RestaurantDto> getAllRestaurants(Pageable pageable, double minAvgCheck, double maxAvgCheck, String type, Integer minRating) {
-//        Page<Restaurant> restaurants = restaurantDao.findByAverageCheckBetweenAndTypeAndRatingGreaterThanEqual(minAvgCheck, maxAvgCheck, type, minRating, pageable);
-//        return restaurants.map(this::convertToDto);
-//    }
-
     public List<RestaurantDto> getRestaurantsByName(String restaurantName) {
         List<Restaurant> restaurants = restaurantDao.findByRestaurantByName(restaurantName);
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
-//        return restaurantDao.findByRestaurantByName(restaurantName);
     }
 
     public double getAvgRatingByRestaurantId(int id) {
     return restaurantDao.getAvgRatingByRestaurantId(id);
     }
 
-//    public List<RestaurantDto> getRestaurantsByUserName(String userName) {
-//        List<Restaurant> restaurants = restaurantDao.findFavoriteRestaurantsByUserName(userName);
-//        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
-//    }
 public List<RestaurantDto> getRestaurantsByUserName(String userName) {
     List<Restaurant> restaurants = restaurantDao.findFavoriteRestaurantsByUserName(userName);
     List<RestaurantDto> favoriteRestaurants = new ArrayList<>();
@@ -128,7 +103,6 @@ public List<RestaurantDto> getRestaurantsByUserName(String userName) {
         RestaurantDto restaurantDto = restaurantsConverter.restaurantToRestaurantDto(restaurant);
         favoriteRestaurants.add(restaurantDto);
     }
-
     return favoriteRestaurants;
 }
     private RestaurantDto convertToDto(Restaurant restaurant) {

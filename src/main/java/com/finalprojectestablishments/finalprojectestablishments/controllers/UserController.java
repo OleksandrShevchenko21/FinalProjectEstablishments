@@ -1,13 +1,9 @@
 package com.finalprojectestablishments.finalprojectestablishments.controllers;
 
-import com.finalprojectestablishments.finalprojectestablishments.dto.RestaurantDto;
 import com.finalprojectestablishments.finalprojectestablishments.dto.UserDto;
-import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
 import com.finalprojectestablishments.finalprojectestablishments.entity.User;
-import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
 import com.finalprojectestablishments.finalprojectestablishments.services.UserService;
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.UserConverter;
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
@@ -20,7 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
@@ -43,8 +39,6 @@ public class UserController {
     public ResponseEntity<List<UserDto>> getAllUsers() {
         List<User> users = userService.findAll();
         List<UserDto> userDtoList = userConverter.userListToUserDtoList(users);
-//        List<UserDto> users =userService.findAll();
-
         return new ResponseEntity<>(userDtoList, HttpStatus.valueOf(200));
     }
 
@@ -54,9 +48,16 @@ public class UserController {
         UserDto userDto = userConverter.userToUserDto(user);
         return new ResponseEntity<>(userDto, HttpStatus.valueOf(200));
     }
+//    @GetMapping("/username/{userName}")
+//    public ResponseEntity<List<UserDto>> getUserByUserName(@PathVariable String userName) {
+//
+//        List<User> users = userService.findListByUserName(userName);
+//        List<UserDto> userDtoList = userConverter.userListToUserDtoList(users);
+//        return new ResponseEntity<>(userDtoList, HttpStatus.valueOf(200));
+//    }
     @GetMapping("/username/{userName}")
     public ResponseEntity<UserDto> getUserbyUserName(@PathVariable String userName) {
-        User user = userService.findByName(userName);
+        User user = userService.findByUserName(userName);
         UserDto userDto = userConverter.userToUserDto(user);
         return new ResponseEntity<>(userDto, HttpStatus.valueOf(200));
     }
@@ -69,6 +70,8 @@ public class UserController {
 //        user.setPassword(userDto.getPassword());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRole("ROLE_" + userDto.getRole());
+        user.setNumber(userDto.getNumber());
+        user.setEmail(userDto.getEmail());
         userService.save(user);
     }
     @PostMapping("/login")
@@ -90,7 +93,6 @@ public class UserController {
             headers.add("Authorization","Bearer " +jwtToken);
             return new ResponseEntity<>("you are log in", headers, HttpStatus.ACCEPTED);
         }
-
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
@@ -99,14 +101,20 @@ public class UserController {
         User user = userService.findById(id);
         user.setUserName(userDto.getUserName());
         user.setPassword(userDto.getPassword());
-        user.setRole(userDto.getRole());
+        user.setRole("ROLE_" + userDto.getRole());
+        user.setNumber(userDto.getNumber());
+        user.setEmail(userDto.getEmail());
         userService.update(user);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable int id) {
-        userService.deleteById(id);
-
+//    @DeleteMapping("/{id}")
+//    public void deleteUser(@PathVariable int id) {
+//        userService.deleteById(id);
+//
+//    }
+@Transactional
+    @DeleteMapping("/{userName}")
+    public void deleteUser(@PathVariable String userName) {
+        userService.deleteByUserName(userName);
     }
-
 }

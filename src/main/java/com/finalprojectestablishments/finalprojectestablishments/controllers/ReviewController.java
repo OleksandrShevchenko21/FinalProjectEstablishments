@@ -78,7 +78,6 @@ public class ReviewController {
         reviewService.update(id, review);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
     @DeleteMapping("/{id}")
     public void deleteReview(@PathVariable int id) {
 
