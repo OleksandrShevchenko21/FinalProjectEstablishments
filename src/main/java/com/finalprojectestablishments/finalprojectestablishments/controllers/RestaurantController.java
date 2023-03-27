@@ -44,7 +44,7 @@ public class RestaurantController {
         return new ResponseEntity<>(restaurantDto, HttpStatus.valueOf(200));
     }
 
-    @PostMapping("")
+    @PostMapping("/admin")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveRestaurant(@RequestBody RestaurantDto restaurantDto) {
         Restaurant restaurant = new Restaurant();
@@ -58,7 +58,7 @@ public class RestaurantController {
         restaurantService.save(restaurant);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/admin/{id}")
     public void updateRestaurant(@PathVariable int id, @RequestBody RestaurantDto restaurantDto) {
         Restaurant restaurant = restaurantService.findById(id);
         restaurant.setRestaurantName(restaurantDto.getRestaurantName());
@@ -71,7 +71,7 @@ public class RestaurantController {
         restaurantService.update(id, restaurant);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public void deleteRestaurant(@PathVariable int id) {
         restaurantService.deleteById(id);
     }

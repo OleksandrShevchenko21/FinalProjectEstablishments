@@ -41,7 +41,7 @@ public class NewsController {
         return new ResponseEntity<>(newsDto, HttpStatus.valueOf(200));
     }
 
-    @PostMapping("/general/{restaurantId}")
+    @PostMapping("/general/admin/{restaurantId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveGeneralNews(@PathVariable int restaurantId,
                                 @RequestBody NewsDto newsDto) {
@@ -52,7 +52,7 @@ public class NewsController {
         newsService.saveGeneral(generalNews);
     }
 
-    @PatchMapping("/general/{id}")
+    @PatchMapping("/general/admin/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public void updateGeneralNews(@PathVariable int id,
                                   @RequestBody NewsDto newsDto) {
@@ -61,7 +61,7 @@ public class NewsController {
         newsService.saveGeneral(generalNews);
     }
 
-    @DeleteMapping("/general/{id}")
+    @DeleteMapping("/general/admin/{id}")
     public void deleteNews(@PathVariable int id) {
         newsService.deleteGeneral(id);
     }
@@ -81,7 +81,7 @@ public class NewsController {
         return new ResponseEntity<>(newsDto, HttpStatus.valueOf(200));
     }
 
-    @PostMapping("/promotion/{restaurantId}")
+    @PostMapping("/promotion/admin/{restaurantId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void savePromotionNews(@PathVariable int restaurantId,
                                   @RequestBody NewsDto newsDto) {
@@ -93,7 +93,7 @@ public class NewsController {
         newsService.savePromotion(promotionNews);
     }
 
-    @PatchMapping("/promotion/{id}")
+    @PatchMapping("/promotion/admin/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public void updatePromotionNews(@PathVariable int id,
                                     @RequestBody NewsDto newsDto) {
@@ -102,7 +102,7 @@ public class NewsController {
         newsService.savePromotion(promotionNews);
     }
 
-    @DeleteMapping("/promotion/{id}")
+    @DeleteMapping("/promotion/admin/{id}")
     public void deletePromotionNews(@PathVariable int id) {
         newsService.deletePromotion(id);
     }
@@ -122,7 +122,7 @@ public class NewsController {
         return new ResponseEntity<>(newsDto, HttpStatus.valueOf(200));
     }
 
-    @PostMapping("/event/{restaurantId}")
+    @PostMapping("/event/admin/{restaurantId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveEventNews(@PathVariable int restaurantId,
                               @RequestBody NewsDto newsDto) {
@@ -133,7 +133,7 @@ public class NewsController {
         newsService.saveEvent(eventNews);
     }
 
-    @PatchMapping("/event/{id}")
+    @PatchMapping("/event/admin/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public void updateEventNews(@PathVariable int id,
                                 @RequestBody NewsDto newsDto) {
@@ -143,7 +143,7 @@ public class NewsController {
         newsService.saveEvent(eventNews);
     }
 
-    @DeleteMapping("/event/{id}")
+    @DeleteMapping("/event/admin/{id}")
     public void deleteEventNews(@PathVariable int id) {
         newsService.deleteEvent(id);
     }

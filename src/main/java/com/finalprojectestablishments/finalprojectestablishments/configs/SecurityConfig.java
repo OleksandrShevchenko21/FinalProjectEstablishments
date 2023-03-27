@@ -92,11 +92,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/api/users").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/news/general/{restaurantId}").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.POST, "/api/reviews/restaurant/{restaurantId}/{userName}").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.POST, "/api/users").permitAll()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers(HttpMethod.GET, "/secure").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.GET, "/api/restaurants").permitAll()
+
+                .antMatchers(HttpMethod.POST, "/api/restaurants/admin/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/api/restaurants/admin/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/restaurants/admin/**").hasAnyRole("ADMIN")
+
+                .antMatchers(HttpMethod.POST, "/api/news/general/admin/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/api/news/general/admin/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/news/general/admin/**").hasAnyRole("ADMIN")
+
+                .antMatchers(HttpMethod.POST, "/api/news/promotion/admin/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/api/news/promotion/admin/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/news/promotion/admin/**").hasAnyRole("ADMIN")
+
+                .antMatchers(HttpMethod.POST, "/api/news/event/admin/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/api/news/event/admin/**").hasAnyRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/news/event/admin/**").hasAnyRole("ADMIN")
+
+//                .antMatchers(HttpMethod.POST, "/api/reviews/restaurant/{restaurantId}/{userName}").hasAnyRole("ADMIN", "USER")
+//                .antMatchers(HttpMethod.POST, "/api/users").permitAll()
+//                .antMatchers(HttpMethod.POST, "/login").permitAll()
+//                .antMatchers(HttpMethod.GET, "/secure").hasAnyRole("ADMIN", "USER")
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().cors().configurationSource(corsConfigurationSource())
 

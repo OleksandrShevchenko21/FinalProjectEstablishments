@@ -101,7 +101,7 @@ public class UserController {
         User user = userService.findById(id);
         user.setUserName(userDto.getUserName());
         user.setPassword(userDto.getPassword());
-        user.setRole("ROLE_" + userDto.getRole());
+        user.setRole(userDto.getRole());
         user.setNumber(userDto.getNumber());
         user.setEmail(userDto.getEmail());
         userService.update(user);
