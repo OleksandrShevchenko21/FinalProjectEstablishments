@@ -32,10 +32,10 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @Column(nullable = false)
+    @Column
     private String number;
 
-    @Column(nullable = false)
+    @Column
     private String email;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
