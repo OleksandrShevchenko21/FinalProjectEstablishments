@@ -60,6 +60,7 @@ public class Restaurant {
     @Column(nullable = true)
     private Double averageRating;
 
+
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     @JsonIgnoreProperties("restaurant")
     private List<Review> reviews;

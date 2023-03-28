@@ -49,14 +49,13 @@ public class ReviewController {
         return new ResponseEntity<>(reviewDto, HttpStatus.valueOf(200));
     }
 
-    @PostMapping("/{restaurantId}/{userName}")
+    @PostMapping("/admin/{restaurantId}/{userName}")
 //    @PostMapping("/{restaurantId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveReview(
             @PathVariable int restaurantId,
             @PathVariable String userName,
             @RequestBody ReviewDto reviewDto) {
-
 
         Review review = new Review();
         User user = userService.findByUserName(userName);
@@ -69,7 +68,7 @@ public class ReviewController {
         reviewService.save(review);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/admin/{id}")
     public void updateReview(@PathVariable int id, @RequestBody ReviewDto reviewDto) {
         Review review = reviewService.findById(id);
         review.setComment(reviewDto.getComment());
@@ -78,7 +77,7 @@ public class ReviewController {
         reviewService.update(id, review);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public void deleteReview(@PathVariable int id) {
 
         reviewService.delete(id);
