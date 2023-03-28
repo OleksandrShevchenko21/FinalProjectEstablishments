@@ -31,32 +31,28 @@ public class Restaurant {
     @Column(nullable = false, unique = true)
     @NotEmpty
     private String restaurantName;
-    //    @NotBlank
+
     @Column(nullable = true)
     private String address;
 
-    //    @NotBlank
     @Column(nullable = true)
     private String schedule;
 
-    //    @NotBlank
     @Column(nullable = true)
     private String contacts;
 
-    //    @NotBlank
     @Column(nullable = true)
     private String news;
 
-    //    @NotBlank
     @Column(nullable = true)
     private String type;
 
-    //    @NotBlank
     @Column(nullable = true)
     private Double averageCheck;
 
     @Column(nullable = true)
     private LocalDate dateOfPublish;
+
     @Column(nullable = true)
     private Double averageRating;
 
@@ -89,7 +85,4 @@ public class Restaurant {
     )
     private List<User> users;
 
-//    @OneToMany(mappedBy = "restaurant",cascade = CascadeType.ALL)
-//    @JsonIgnoreProperties({"restaurant"})
-//    private List<FavoritesRestaurant> favorites = new ArrayList<>();
 }

@@ -39,9 +39,6 @@ public class UserService {
         userDao.save(user);
     }
 
-//    public void deleteById(int id) {
-//        userDao.deleteById(id);
-//    }
     public void deleteByUserName(String userName) {
         userDao.removeUserByUserName(userName);
     }

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.DecimalMin;
 import java.time.LocalDate;
 
 
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 public class RestaurantDto {
 
     private int id;
+
     private String restaurantName;
 
     private String type;
@@ -33,8 +35,6 @@ public class RestaurantDto {
     private LocalDate dateOfPublish;
 
     private Double averageRating;
-
-//    private String userName;
     public RestaurantDto(RestaurantDto restaurantDto) {
 
     }

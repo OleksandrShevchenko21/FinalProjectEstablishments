@@ -37,10 +37,6 @@ public class Booking {
 
     private String purpose;
 
-//    private String writeToMe;
-
-//    private boolean drink;
-
     private String gender;
 
     private int numPeople;

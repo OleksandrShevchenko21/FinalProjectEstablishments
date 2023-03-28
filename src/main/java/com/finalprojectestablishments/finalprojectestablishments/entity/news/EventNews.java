@@ -1,6 +1,5 @@
 package com.finalprojectestablishments.finalprojectestablishments.entity.news;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
 import javax.persistence.*;
@@ -8,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Getter
 @Setter

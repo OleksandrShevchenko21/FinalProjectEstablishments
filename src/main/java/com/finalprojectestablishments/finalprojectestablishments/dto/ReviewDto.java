@@ -15,17 +15,14 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class ReviewDto {
     private int id;
-    @NotBlank
+
     private String comment;
-//    @NotNull
-//    @DecimalMax(5.0)
-//    @DecimalMin(1.0)
+
     private int rating;
-//    @NotNull
+
     private String userName;
-//    @NotNull
+
     private int restaurantId;
-//    @NotNull
-    @DecimalMin(value = "0.0", inclusive = false)
+
     private Double averageCheck;
 }

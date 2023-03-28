@@ -54,6 +54,4 @@ public class User {
     )
     private List<Restaurant> favoritesRestaurants;
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<FavoritesRestaurant> favoritesRestaurants = new ArrayList<>();
 }

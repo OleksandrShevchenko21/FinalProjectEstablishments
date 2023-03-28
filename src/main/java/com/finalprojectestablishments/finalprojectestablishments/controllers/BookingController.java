@@ -1,10 +1,8 @@
 package com.finalprojectestablishments.finalprojectestablishments.controllers;
 
 import com.finalprojectestablishments.finalprojectestablishments.dto.BookingDto;
-import com.finalprojectestablishments.finalprojectestablishments.dto.ReviewDto;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Booking;
 import com.finalprojectestablishments.finalprojectestablishments.entity.Restaurant;
-import com.finalprojectestablishments.finalprojectestablishments.entity.Review;
 import com.finalprojectestablishments.finalprojectestablishments.entity.User;
 import com.finalprojectestablishments.finalprojectestablishments.services.BookingService;
 import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
@@ -20,7 +18,6 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/booking")
-//@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class BookingController {
     private BookingService bookingService;
     private UserService userService;

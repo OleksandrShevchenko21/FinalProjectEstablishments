@@ -1,6 +1,5 @@
 package com.finalprojectestablishments.finalprojectestablishments.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,15 +15,11 @@ public class NewsDto {
 
     private int id;
 
-
     private String generalNews;
-
 
     private String promotionNews;
 
-
     private String eventNews;
-
 
     private int restaurantId;
 

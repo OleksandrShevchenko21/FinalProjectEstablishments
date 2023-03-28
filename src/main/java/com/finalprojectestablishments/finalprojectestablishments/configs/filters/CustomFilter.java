@@ -43,14 +43,8 @@ public class CustomFilter extends OncePerRequestFilter {
                     .parseClaimsJws(token)
                     .getBody()
                     .getSubject();
-//            String role = (String) Jwts.parser()
-//                    .setSigningKey("gfl".getBytes(StandardCharsets.UTF_8))
-//                    .parseClaimsJws(token)
-//                    .getBody()
-//                    .get("role");
 
             System.out.println("subject: " + subject);
-//            System.out.println("role: " + role);
 
             User userByUsername = userDao.findUserByUserName(subject);
             System.out.println(userByUsername);

@@ -25,7 +25,6 @@ import java.util.List;
 @RequestMapping("/api/users")
 @AllArgsConstructor
 
-//@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class UserController {
 
 
@@ -48,13 +47,7 @@ public class UserController {
         UserDto userDto = userConverter.userToUserDto(user);
         return new ResponseEntity<>(userDto, HttpStatus.valueOf(200));
     }
-//    @GetMapping("/username/{userName}")
-//    public ResponseEntity<List<UserDto>> getUserByUserName(@PathVariable String userName) {
-//
-//        List<User> users = userService.findListByUserName(userName);
-//        List<UserDto> userDtoList = userConverter.userListToUserDtoList(users);
-//        return new ResponseEntity<>(userDtoList, HttpStatus.valueOf(200));
-//    }
+
     @GetMapping("/username/{userName}")
     public ResponseEntity<UserDto> getUserbyUserName(@PathVariable String userName) {
         User user = userService.findByUserName(userName);
@@ -67,7 +60,6 @@ public class UserController {
     public void saveUser(@RequestBody UserDto userDto) {
         User user = new User();
         user.setUserName(userDto.getUserName());
-//        user.setPassword(userDto.getPassword());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         user.setRole("ROLE_" + userDto.getRole());
         user.setNumber(userDto.getNumber());
@@ -84,7 +76,6 @@ public class UserController {
 
             String jwtToken = Jwts.builder()
                     .setSubject(authenticate.getName())
-//                    .setRole(authenticate.getRole())
                     .setExpiration(new Date(new Date().getTime() + 60 * 60 * 1000))
                     .signWith(SignatureAlgorithm.HS512, "gfl".getBytes(StandardCharsets.UTF_8))
                     .compact();
@@ -107,11 +98,6 @@ public class UserController {
         userService.update(user);
     }
 
-//    @DeleteMapping("/{id}")
-//    public void deleteUser(@PathVariable int id) {
-//        userService.deleteById(id);
-//
-//    }
 @Transactional
     @DeleteMapping("/{userName}")
     public void deleteUser(@PathVariable String userName) {

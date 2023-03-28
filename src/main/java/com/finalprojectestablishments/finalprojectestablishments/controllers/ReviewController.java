@@ -20,7 +20,6 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/api/reviews/restaurant")
 
-//@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*")
 public class ReviewController {
 
     private ReviewService reviewService;
@@ -50,7 +49,6 @@ public class ReviewController {
     }
 
     @PostMapping("/admin/{restaurantId}/{userName}")
-//    @PostMapping("/{restaurantId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void saveReview(
             @PathVariable int restaurantId,

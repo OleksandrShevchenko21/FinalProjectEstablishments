@@ -5,10 +5,7 @@ import com.finalprojectestablishments.finalprojectestablishments.entity.Restaura
 import com.finalprojectestablishments.finalprojectestablishments.entity.User;
 import com.finalprojectestablishments.finalprojectestablishments.services.RestaurantService;
 import com.finalprojectestablishments.finalprojectestablishments.services.UserService;
-import com.finalprojectestablishments.finalprojectestablishments.utils.BuildPage;
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.RestaurantsConverter;
-
-import javax.servlet.http.HttpServletResponse;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,8 +24,6 @@ public class RestaurantController {
     private RestaurantService restaurantService;
     private UserService userService;
     private RestaurantsConverter restaurantsConverter;
-    private BuildPage buildPage;
-
 
     @GetMapping("")
     public ResponseEntity<List<RestaurantDto>> getAllRestaurants() {
