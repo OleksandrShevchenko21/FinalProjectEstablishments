@@ -6,11 +6,9 @@ import com.finalprojectestablishments.finalprojectestablishments.entity.Restaura
 import com.finalprojectestablishments.finalprojectestablishments.utils.converter.RestaurantsConverter;
 import lombok.AllArgsConstructor;
 
-
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMap;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,15 +20,16 @@ public class RestaurantService {
     private RestaurantsConverter restaurantsConverter;
     private final ModelMapper modelMapper;
 
-public List<RestaurantDto> findAll() {
-    List<Restaurant> restaurants = restaurantDao.findAll();
-    return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
+    public List<RestaurantDto> findAll() {
+        List<Restaurant> restaurants = restaurantDao.findAll();
+        return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
 
-}
+    }
 
-    public void save (Restaurant restaurant){
+    public void save(Restaurant restaurant) {
         restaurantDao.save(restaurant);
     }
+
     public Restaurant findById(int id) {
         return restaurantDao.findById(id).get();
 
@@ -48,14 +47,17 @@ public List<RestaurantDto> findAll() {
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByRatingAsc();
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
+
     public List<RestaurantDto> getRestaurantsSortedByRatingDesc() {
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByRatingDesc();
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
+
     public List<RestaurantDto> getRestaurantsDateOfPublishAsc() {
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByDateOfPublishAsc();
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
+
     public List<RestaurantDto> getRestaurantsDateOfPublishDesc() {
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByDateOfPublishDesc();
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
@@ -66,6 +68,7 @@ public List<RestaurantDto> findAll() {
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByRestaurantNameAsc();
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
     }
+
     public List<RestaurantDto> getRestaurantsOrderByNameDesc() {
         List<Restaurant> restaurants = restaurantDao.findAllByOrderByRestaurantNameDesc();
         return restaurantsConverter.resaturantListToRestaurantDtoList(restaurants);
@@ -92,21 +95,18 @@ public List<RestaurantDto> findAll() {
     }
 
     public double getAvgRatingByRestaurantId(int id) {
-    return restaurantDao.getAvgRatingByRestaurantId(id);
+        return restaurantDao.getAvgRatingByRestaurantId(id);
     }
 
-public List<RestaurantDto> getRestaurantsByUserName(String userName) {
-    List<Restaurant> restaurants = restaurantDao.findFavoriteRestaurantsByUserName(userName);
-    List<RestaurantDto> favoriteRestaurants = new ArrayList<>();
+    public List<RestaurantDto> getRestaurantsByUserName(String userName) {
+        List<Restaurant> restaurants = restaurantDao.findFavoriteRestaurantsByUserName(userName);
+        List<RestaurantDto> favoriteRestaurants = new ArrayList<>();
 
-    for (Restaurant restaurant : restaurants) {
-        RestaurantDto restaurantDto = restaurantsConverter.restaurantToRestaurantDto(restaurant);
-        favoriteRestaurants.add(restaurantDto);
-    }
-    return favoriteRestaurants;
-}
-    private RestaurantDto convertToDto(Restaurant restaurant) {
-        return modelMapper.map(restaurant, RestaurantDto.class);
+        for (Restaurant restaurant : restaurants) {
+            RestaurantDto restaurantDto = restaurantsConverter.restaurantToRestaurantDto(restaurant);
+            favoriteRestaurants.add(restaurantDto);
+        }
+        return favoriteRestaurants;
     }
 }
 
